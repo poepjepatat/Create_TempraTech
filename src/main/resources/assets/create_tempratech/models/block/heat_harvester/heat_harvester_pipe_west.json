@@ -1,0 +1,23 @@
+{
+	"format_version": "1.21.11",
+	"credit": "Made with Blockbench",
+	"textures": {
+		"1": "create_tempratech:block/heat_harvester/heat_harvester_pipe_west",
+		"particle": "heat_harvester_pipe"
+	},
+	"elements": [
+		{
+			"from": [0, 6, 6],
+			"to": [6, 10, 10],
+			"rotation": {"angle": 0, "axis": "y", "origin": [14, 8, 12]},
+			"faces": {
+				"north": {"uv": [0, 8, 4, 12], "texture": "#1"},
+				"east": {"uv": [0, 0, 6, 4], "texture": "#1"},
+				"south": {"uv": [10, 0, 14, 4], "texture": "#1"},
+				"west": {"uv": [0, 4, 6, 8], "texture": "#1"},
+				"up": {"uv": [10, 6, 6, 0], "texture": "#1"},
+				"down": {"uv": [10, 6, 6, 12], "texture": "#1"}
+			}
+		}
+	]
+}

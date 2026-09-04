@@ -1,0 +1,89 @@
+{
+  "multipart": [
+    {
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester"
+      }
+    },
+    {
+      "when": {
+        "up": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_up"
+      }
+    },
+    {
+      "when": {
+        "up": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_core"
+      }
+    },
+    {
+      "when": {
+        "north": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_north"
+      }
+    },
+    {
+      "when": {
+        "north": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_core"
+      }
+    },
+    {
+      "when": {
+        "east": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_east"
+      }
+    },
+    {
+      "when": {
+        "east": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_core"
+      }
+    },
+    {
+      "when": {
+        "south": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_south"
+      }
+    },
+    {
+      "when": {
+        "south": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_core"
+      }
+    },
+    {
+      "when": {
+        "west": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_west"
+      }
+    },
+    {
+      "when": {
+        "west": true
+      },
+      "apply": {
+        "model": "create_tempratech:block/heat_harvester/heat_harvester_pipe_core"
+      }
+    }
+  ]
+}
