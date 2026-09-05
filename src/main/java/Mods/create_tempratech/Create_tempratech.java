@@ -1,5 +1,6 @@
 package Mods.create_tempratech;
 
+import Mods.create_tempratech.Regs.modBlockEntities;
 import Mods.create_tempratech.Regs.modBlocks;
 import Mods.create_tempratech.Regs.modItems;
 import com.mojang.logging.LogUtils;
@@ -50,10 +51,11 @@ public class Create_tempratech {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
 
     // Creates a creative tab with the id "create_tempratech:example_tab" for the example item, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.create_tempratech")).withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> modItems.Heat_Harvester.get().getDefaultInstance()).displayItems((parameters, output) -> {
-        output.accept(modItems.Heat_Harvester);
-        output.accept(modItems.Titanium_Ingot);
-        output.accept(modItems.Heat_Pipe);
+    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder().title(Component.translatable("itemGroup.create_tempratech")).withTabsBefore(CreativeModeTabs.COMBAT).icon(() -> modItems.HEAT_HARVESTER.get().getDefaultInstance()).displayItems((parameters, output) -> {
+        output.accept(modItems.HEAT_HARVESTER);
+        output.accept(modItems.TITANIUM_INGOT);
+        output.accept(modItems.HEAT_PIPE);
+        output.accept(modItems.THERMOMETER);
     }).build());
 
 
@@ -72,6 +74,7 @@ public class Create_tempratech {
         modItems.ITEMS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
+        modBlockEntities.BLOCK_ENTITIES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (Create_tempratech) to respond directly to events.

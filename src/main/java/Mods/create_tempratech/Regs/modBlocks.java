@@ -3,6 +3,7 @@ package Mods.create_tempratech.Regs;
 import Mods.create_tempratech.Create_tempratech;
 import Mods.create_tempratech.Regs.Blocks.HeatHarvester;
 import Mods.create_tempratech.Regs.Blocks.HeatPipe;
+import Mods.create_tempratech.Regs.Blocks.Thermometer;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,9 +15,13 @@ public class modBlocks {
 
     public static final DeferredBlock<HeatHarvester> HEAT_HARVESTER
             = BLOCKS.register("heat_harvester",
-            () -> new HeatHarvester(BlockBehaviour.Properties.of().dynamicShape().forceSolidOn()));
+            () -> new HeatHarvester(BlockBehaviour.Properties.of()));
 
     public static final DeferredBlock<HeatPipe> HEAT_PIPE
             = BLOCKS.register("heat_pipe",
-            () -> new HeatPipe(BlockBehaviour.Properties.of().dynamicShape()));
+            () -> new HeatPipe(BlockBehaviour.Properties.of()));
+
+    public static final DeferredBlock<Thermometer> THERMOMETER
+            = BLOCKS.register("thermometer",
+            () -> new Thermometer(BlockBehaviour.Properties.of()));
 }

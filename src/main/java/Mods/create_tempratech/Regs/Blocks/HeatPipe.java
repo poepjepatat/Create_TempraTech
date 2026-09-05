@@ -1,17 +1,23 @@
 package Mods.create_tempratech.Regs.Blocks;
 
+import Mods.create_tempratech.Regs.modBlockEntities;
 import Mods.create_tempratech.Regs.modBlocks;
+import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class HeatPipe extends Block {
+public class HeatPipe extends BaseEntityBlock {
 
     // =========================================================
     // CONNECTION PROPERTIES
@@ -87,6 +93,11 @@ public class HeatPipe extends Block {
         );
     }
 
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return null;
+    }
+
 
     // =========================================================
     // UPDATE CONNECTIONS
@@ -98,12 +109,12 @@ public class HeatPipe extends Block {
             BlockPos pos
     ) {
         return state
-                .setValue(UP, canConnect(level, pos.above()))
-                .setValue(DOWN, canConnect(level, pos.below()))
-                .setValue(NORTH, canConnect(level, pos.north()))
-                .setValue(SOUTH, canConnect(level, pos.south()))
-                .setValue(EAST, canConnect(level, pos.east()))
-                .setValue(WEST, canConnect(level, pos.west()));
+                .setValue(UP, canConnect(level, pos.above(), Direction.UP))
+                .setValue(DOWN, canConnect(level, pos.below(), Direction.DOWN))
+                .setValue(NORTH, canConnect(level, pos.north(), Direction.NORTH))
+                .setValue(SOUTH, canConnect(level, pos.south(), Direction.SOUTH))
+                .setValue(EAST, canConnect(level, pos.east(), Direction.EAST))
+                .setValue(WEST, canConnect(level, pos.west(), Direction.WEST));
     }
 
 
@@ -113,13 +124,24 @@ public class HeatPipe extends Block {
 
     private boolean canConnect(
             net.minecraft.world.level.LevelAccessor level,
-            BlockPos pos
+            BlockPos pos,
+            net.minecraft.core.Direction direction
     ) {
         BlockState state = level.getBlockState(pos);
 
+        if (state.is(modBlocks.HEAT_PIPE)) {
+            return true;
+        }
 
+        if (state.is(modBlocks.HEAT_HARVESTER)) {
+            return direction != net.minecraft.core.Direction.UP;
+        }
 
-        return state.is(modBlocks.HEAT_PIPE);
+        if(state.is(modBlocks.THERMOMETER)){
+            return direction == Direction.UP;
+        }
+
+        return false;
     }
 
 
@@ -211,5 +233,10 @@ public class HeatPipe extends Block {
                 EAST,
                 WEST
         );
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return modBlockEntities.THERMOMETER.get().create(pos, state);;
     }
 }

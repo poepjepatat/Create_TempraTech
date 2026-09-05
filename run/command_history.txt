@@ -1,2 +1,3 @@
 /datapack list
 /neoforge mods
+/give Dev create_tempratech:thermometer
