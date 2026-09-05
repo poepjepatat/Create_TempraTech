@@ -3,7 +3,6 @@ package Mods.create_tempratech.Regs.Blocks;
 import Mods.create_tempratech.Regs.modBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -95,7 +94,7 @@ public class HeatPipe extends Block {
 
     private BlockState updateConnections(
             BlockState state,
-            Level level,
+            net.minecraft.world.level.LevelAccessor level,
             BlockPos pos
     ) {
         return state
@@ -113,13 +112,14 @@ public class HeatPipe extends Block {
     // =========================================================
 
     private boolean canConnect(
-            Level level,
+            net.minecraft.world.level.LevelAccessor level,
             BlockPos pos
     ) {
         BlockState state = level.getBlockState(pos);
 
-        return state.is(modBlocks.HEAT_HARVESTER)
-                || state.is(modBlocks.HEAT_PIPE);
+
+
+        return state.is(modBlocks.HEAT_PIPE);
     }
 
 
@@ -189,7 +189,7 @@ public class HeatPipe extends Block {
     ) {
         return updateConnections(
                 state,
-                (Level) level,
+                level,
                 pos
         );
     }

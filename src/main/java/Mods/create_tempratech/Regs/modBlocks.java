@@ -14,7 +14,7 @@ public class modBlocks {
 
     public static final DeferredBlock<HeatHarvester> HEAT_HARVESTER
             = BLOCKS.register("heat_harvester",
-            () -> new HeatHarvester(BlockBehaviour.Properties.of().forceSolidOn()));
+            () -> new HeatHarvester(BlockBehaviour.Properties.of().dynamicShape().forceSolidOn()));
 
     public static final DeferredBlock<HeatPipe> HEAT_PIPE
             = BLOCKS.register("heat_pipe",
