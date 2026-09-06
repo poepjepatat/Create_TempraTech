@@ -1,9 +1,13 @@
 package Mods.create_tempratech;
 
 import Mods.create_tempratech.Client.ClientRegister;
+import Mods.create_tempratech.Network.ModPayloads;
+import Mods.create_tempratech.Regs.ModAttachments;
 import Mods.create_tempratech.Regs.modBlockEntities;
 import Mods.create_tempratech.Regs.modBlocks;
 import Mods.create_tempratech.Regs.modItems;
+import Mods.create_tempratech.ThermalSystem.Simulation.ThermalTemperatureInteractionHandler;
+import Mods.create_tempratech.ThermalSystem.Simulation.ThermalServerTickHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -69,6 +73,7 @@ public class Create_tempratech {
     public Create_tempratech(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(ModPayloads::register);
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         modBlocks.BLOCKS.register(modEventBus);
@@ -77,11 +82,14 @@ public class Create_tempratech {
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
         modBlockEntities.BLOCK_ENTITIES.register(modEventBus);
+        ModAttachments.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (Create_tempratech) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(ThermalServerTickHandler.class);
+        NeoForge.EVENT_BUS.register(ThermalTemperatureInteractionHandler.class);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

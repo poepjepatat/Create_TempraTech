@@ -1,3 +1,9 @@
 /datapack list
 /neoforge mods
 /give Dev create_tempratech:thermometer
+/neoforge generate start
+/neoforge generate start 26 73 -30
+/neoforge mods
+/setblock ~ ~ ~ minecraft:bedrock
+/fill -32 85 4
+/fill -32 85 4 -49 85 20 minecraft:bedrock
