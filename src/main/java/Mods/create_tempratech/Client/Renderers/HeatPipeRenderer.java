@@ -1,0 +1,44 @@
+package Mods.create_tempratech.Client.Renderers;
+
+import Mods.create_tempratech.Regs.BlockEntities.HeatPipeEntity;
+import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.MultiBufferSource;
+import net.minecraft.client.renderer.block.BlockRenderDispatcher;
+import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
+import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
+import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.client.model.data.ModelData;
+
+public class HeatPipeRenderer implements BlockEntityRenderer<HeatPipeEntity> {
+
+    private final BlockRenderDispatcher blockRenderer;
+
+    public HeatPipeRenderer(BlockEntityRendererProvider.Context context) {
+        this.blockRenderer = Minecraft.getInstance().getBlockRenderer();
+    }
+
+    @Override
+    public void render(
+            HeatPipeEntity blockEntity,
+            float partialTick,
+            PoseStack poseStack,
+            MultiBufferSource bufferSource,
+            int packedLight,
+            int packedOverlay
+    ) {
+        BlockState state = blockEntity.getBlockState();
+
+        poseStack.pushPose();
+        blockRenderer.renderSingleBlock(
+                state,
+                poseStack,
+                bufferSource,
+                packedLight,
+                packedOverlay,
+                ModelData.EMPTY,
+                null
+        );
+        poseStack.popPose();
+    }
+}   

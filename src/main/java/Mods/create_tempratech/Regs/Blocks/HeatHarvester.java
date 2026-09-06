@@ -1,5 +1,7 @@
 package Mods.create_tempratech.Regs.Blocks;
 
+import Mods.create_tempratech.Regs.BlockEntities.HeatHarvesterEntity;
+import Mods.create_tempratech.Regs.modBlockEntities;
 import com.mojang.serialization.MapCodec;
 import Mods.create_tempratech.Regs.modBlocks;
 import net.minecraft.core.BlockPos;
@@ -10,6 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.BaseEntityBlock;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,8 +22,9 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class HeatHarvester extends Block {
+public class HeatHarvester extends BaseEntityBlock{
     public static final MapCodec<HeatHarvester> CODEC = simpleCodec(HeatHarvester::new);
     public static final BooleanProperty UP = BooleanProperty.create("up");
     public static final BooleanProperty DOWN = BooleanProperty.create("down");
@@ -44,6 +48,11 @@ public class HeatHarvester extends Block {
                 .setValue(UP, false).setValue(DOWN, false)
                 .setValue(NORTH, false).setValue(SOUTH, false)
                 .setValue(EAST, false).setValue(WEST, false));
+    }
+
+    @Override
+    protected MapCodec<? extends BaseEntityBlock> codec() {
+        return null;
     }
 
     private boolean canConnect(LevelAccessor level, BlockPos pos) {
@@ -89,5 +98,10 @@ public class HeatHarvester extends Block {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(UP, DOWN, NORTH, SOUTH, EAST, WEST);
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new HeatHarvesterEntity(blockPos, blockState);
     }
 }

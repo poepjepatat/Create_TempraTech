@@ -236,7 +236,7 @@ public class HeatPipe extends BaseEntityBlock {
     }
 
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return modBlockEntities.THERMOMETER.get().create(pos, state);;
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return modBlockEntities.HEAT_PIPE_ENTITY.get().create(pos, state);
     }
 }

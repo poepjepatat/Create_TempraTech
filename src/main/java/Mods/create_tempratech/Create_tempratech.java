@@ -1,5 +1,6 @@
 package Mods.create_tempratech;
 
+import Mods.create_tempratech.Client.ClientRegister;
 import Mods.create_tempratech.Regs.modBlockEntities;
 import Mods.create_tempratech.Regs.modBlocks;
 import Mods.create_tempratech.Regs.modItems;
@@ -62,6 +63,7 @@ public class Create_tempratech {
 
 
 
+
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public Create_tempratech(IEventBus modEventBus, ModContainer modContainer) {
@@ -83,6 +85,8 @@ public class Create_tempratech {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+
+        modEventBus.addListener(ClientRegister::registerRenderers);
     }
 
 

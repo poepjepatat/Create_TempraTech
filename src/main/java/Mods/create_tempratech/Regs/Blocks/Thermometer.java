@@ -28,7 +28,7 @@ public class Thermometer extends BaseEntityBlock {
 
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return modBlockEntities.THERMOMETER.get().create(pos, state);
+        return modBlockEntities.THERMOMETER_ENTITY.get().create(pos, state);
     }
 
     @Override

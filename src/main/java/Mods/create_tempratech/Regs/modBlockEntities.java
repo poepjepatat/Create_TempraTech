@@ -1,7 +1,10 @@
 package Mods.create_tempratech.Regs;
 
 import Mods.create_tempratech.Create_tempratech;
+import Mods.create_tempratech.Regs.BlockEntities.HeatHarvesterEntity;
+import Mods.create_tempratech.Regs.BlockEntities.HeatPipeEntity;
 import Mods.create_tempratech.Regs.BlockEntities.ThermometerEntity;
+import Mods.create_tempratech.Regs.Blocks.HeatPipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -19,11 +22,29 @@ public class modBlockEntities {
             );
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermometerEntity>>
-            THERMOMETER
+            THERMOMETER_ENTITY
             = BLOCK_ENTITIES.register("thermometer",
             () -> BlockEntityType.Builder.of(
                     ThermometerEntity::new,
                     modBlocks.THERMOMETER.get()
+            ).build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HeatPipeEntity>>
+            HEAT_PIPE_ENTITY
+            = BLOCK_ENTITIES.register("heat_pipe",
+            () -> BlockEntityType.Builder.of(
+                    HeatPipeEntity::new,
+                    modBlocks.HEAT_PIPE.get()
+            ).build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HeatHarvesterEntity>>
+            HEAT_HARVESTER_ENTITY
+            = BLOCK_ENTITIES.register("heat_harvester",
+            () -> BlockEntityType.Builder.of(
+                    HeatHarvesterEntity::new,
+                    modBlocks.HEAT_HARVESTER.get()
             ).build(null)
     );
 }
