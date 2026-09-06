@@ -4,6 +4,7 @@
   "package": "Mods.create_tempratech.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BlockThermalLightMixin",
     "LevelThermalActivationMixin"
   ],
   "client": [

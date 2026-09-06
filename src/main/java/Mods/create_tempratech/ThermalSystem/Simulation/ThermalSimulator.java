@@ -9,6 +9,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
+import net.neoforged.neoforge.common.extensions.IBlockGetterExtension;
+import net.neoforged.neoforge.common.world.AuxiliaryLightManager;
 import net.neoforged.neoforge.network.PacketDistributor;
 
 /**
@@ -193,6 +195,7 @@ public final class ThermalSimulator {
                 green,
                 blue
         );
+        setActualLight(level, pos, Math.max(1, Math.round(strength * 15.0F)));
 
         PacketDistributor.sendToPlayersTrackingChunk(
                 level,
@@ -212,6 +215,8 @@ public final class ThermalSimulator {
             BlockPos pos,
             GlowManager.GlowData previous
     ) {
+        setActualLight(level, pos, 0);
+
         if (previous == null) {
             return;
         }
@@ -229,6 +234,25 @@ public final class ThermalSimulator {
                         0.0F
                 )
         );
+    }
+
+    private static void setActualLight(
+            ServerLevel level,
+            BlockPos pos,
+            int lightLevel
+    ) {
+        AuxiliaryLightManager lightManager =
+                ((IBlockGetterExtension) level).getAuxLightManager(pos);
+
+        if (lightManager == null) {
+            return;
+        }
+
+        int clamped = Math.max(0, Math.min(15, lightLevel));
+
+        if (lightManager.getLightAt(pos) != clamped) {
+            lightManager.setLightAt(pos, clamped);
+        }
     }
 
     private static boolean hasMeaningfulGlowChange(
