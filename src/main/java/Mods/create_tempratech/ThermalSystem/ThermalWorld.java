@@ -54,6 +54,17 @@ public final class ThermalWorld {
         return data.getEnergy(pos);
     }
 
+    public static double getGlowTemperature(
+            Level level,
+            BlockPos pos
+    ) {
+
+        ThermalMaterial material =
+                getMaterial(level, pos);
+
+        return material.glowTemperature();
+    }
+
     /**
      * Sets energy for a block.
      */

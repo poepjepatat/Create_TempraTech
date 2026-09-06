@@ -5,7 +5,8 @@ public record ThermalMaterial(
         double defaultTemperatureK,
         double specificHeat,
         double density,
-        double conductivity
+        double conductivity,
+        double glowTemperature
 ) {
 
     /**

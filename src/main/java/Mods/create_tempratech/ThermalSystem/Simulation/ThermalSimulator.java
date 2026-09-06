@@ -1,6 +1,8 @@
 package Mods.create_tempratech.ThermalSystem.Simulation;
 
 
+import Mods.create_tempratech.Client.Glowing.GlowClient;
+import Mods.create_tempratech.Client.Glowing.GlowManager;
 import Mods.create_tempratech.ThermalSystem.ThermalMaterial;
 import Mods.create_tempratech.ThermalSystem.ThermalWorld;
 import net.minecraft.core.BlockPos;
@@ -91,6 +93,18 @@ public final class ThermalSimulator {
             activeSet.deactivate(packedPos);
 
             BlockPos pos = BlockPos.of(packedPos);
+
+            double Temperature = ThermalWorld.getTemperatureCelsius(level, pos);
+            double glowTemperature = ThermalWorld.getGlowTemperature(level, pos);
+            double glowStrength = 0;
+
+            if(Temperature > glowTemperature){
+                double glowTemp = Temperature - glowTemperature;
+
+                glowStrength = glowTemp / 10000;
+            }
+
+            GlowManager.setGlow(level, pos, (float)glowStrength);
 
             simulateBlock(level, pos);
 

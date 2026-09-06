@@ -1,0 +1,26 @@
+{
+  "vertex": "create_tempratech:glow_block",
+  "fragment": "create_tempratech:glow_block",
+
+  "samplers": [
+    {
+      "name": "Sampler0"
+    }
+  ],
+
+  "uniforms": [
+    {
+      "name": "GlowStrength",
+      "type": "float",
+      "count": 1,
+      "values": [1.0]
+    },
+
+    {
+      "name": "GlowColor",
+      "type": "float",
+      "count": 3,
+      "values": [1.0, 1.0, 1.0]
+    }
+  ]
+}
