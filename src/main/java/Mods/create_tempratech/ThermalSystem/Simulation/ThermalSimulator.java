@@ -1,14 +1,15 @@
 package Mods.create_tempratech.ThermalSystem.Simulation;
 
 
-import Mods.create_tempratech.Client.Glowing.GlowClient;
 import Mods.create_tempratech.Client.Glowing.GlowManager;
+import Mods.create_tempratech.Network.ThermalGlowPayload;
 import Mods.create_tempratech.ThermalSystem.ThermalMaterial;
 import Mods.create_tempratech.ThermalSystem.ThermalWorld;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.ChunkPos;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 /**
  * Main thermal simulation.
@@ -57,6 +58,9 @@ public final class ThermalSimulator {
      */
     public static final int MAX_OPERATIONS_PER_TICK = 10_000;
 
+    private static final double GLOW_HEAT_RANGE_C = 1500.0;
+    private static final float GLOW_SYNC_EPSILON = 0.02F;
+
     private final ThermalQueue queue;
     private final ThermalActiveSet activeSet;
 
@@ -94,22 +98,158 @@ public final class ThermalSimulator {
 
             BlockPos pos = BlockPos.of(packedPos);
 
-            double Temperature = ThermalWorld.getTemperatureCelsius(level, pos);
-            double glowTemperature = ThermalWorld.getGlowTemperature(level, pos);
-            double glowStrength = 0;
-
-            if(Temperature > glowTemperature){
-                double glowTemp = Temperature - glowTemperature;
-
-                glowStrength = glowTemp / 10000;
+            if (!level.hasChunkAt(pos)) {
+                operations++;
+                continue;
             }
 
-            GlowManager.setGlow(level, pos, (float)glowStrength);
+            if (!level.getBlockState(pos).isAir()) {
+                double temperatureC =
+                        ThermalWorld.getTemperatureCelsius(level, pos);
 
+                ThermalTransformations.tryTransform(
+                        level,
+                        pos,
+                        temperatureC
+                );
+            }
+
+            updateGlow(level, pos);
             simulateBlock(level, pos);
 
             operations++;
         }
+    }
+
+    private void updateGlow(
+            ServerLevel level,
+            BlockPos pos
+    ) {
+        GlowManager.GlowData previous = GlowManager.getGlow(level, pos);
+
+        if (level.getBlockState(pos).isAir()) {
+            clearGlow(level, pos, previous);
+            return;
+        }
+
+        double temperatureC =
+                ThermalWorld.getTemperatureCelsius(level, pos);
+        double glowTemperatureC =
+                ThermalWorld.getGlowTemperature(level, pos);
+
+        if (temperatureC <= glowTemperatureC) {
+            clearGlow(level, pos, previous);
+            return;
+        }
+
+        float heat = (float) Math.max(
+                0.0,
+                Math.min(
+                        1.0,
+                        (temperatureC - glowTemperatureC)
+                                / GLOW_HEAT_RANGE_C
+                )
+        );
+
+        float strength =
+                0.15F + 0.85F * (float) Math.sqrt(heat);
+
+        float red;
+        float green;
+        float blue;
+
+        if (heat < 1.0F / 3.0F) {
+            float local = heat * 3.0F;
+            red = 1.0F;
+            green = lerp(0.9F, 0.1F, local);
+            blue = 0.0F;
+        } else if (heat < 2.0F / 3.0F) {
+            float local = (heat - 1.0F / 3.0F) * 3.0F;
+            red = lerp(1.0F, 0.1F, local);
+            green = lerp(0.1F, 1.0F, local);
+            blue = lerp(0.0F, 0.1F, local);
+        } else {
+            float local = (heat - 2.0F / 3.0F) * 3.0F;
+            red = 0.1F;
+            green = lerp(1.0F, 0.35F, local);
+            blue = lerp(0.1F, 1.0F, local);
+        }
+
+        if (!hasMeaningfulGlowChange(
+                previous,
+                strength,
+                red,
+                green,
+                blue
+        )) {
+            return;
+        }
+
+        GlowManager.setGlow(
+                level,
+                pos,
+                strength,
+                red,
+                green,
+                blue
+        );
+
+        PacketDistributor.sendToPlayersTrackingChunk(
+                level,
+                new ChunkPos(pos),
+                new ThermalGlowPayload(
+                        pos.asLong(),
+                        strength,
+                        red,
+                        green,
+                        blue
+                )
+        );
+    }
+
+    private void clearGlow(
+            ServerLevel level,
+            BlockPos pos,
+            GlowManager.GlowData previous
+    ) {
+        if (previous == null) {
+            return;
+        }
+
+        GlowManager.removeGlow(level, pos);
+
+        PacketDistributor.sendToPlayersTrackingChunk(
+                level,
+                new ChunkPos(pos),
+                new ThermalGlowPayload(
+                        pos.asLong(),
+                        0.0F,
+                        0.0F,
+                        0.0F,
+                        0.0F
+                )
+        );
+    }
+
+    private static boolean hasMeaningfulGlowChange(
+            GlowManager.GlowData previous,
+            float strength,
+            float red,
+            float green,
+            float blue
+    ) {
+        if (previous == null) {
+            return true;
+        }
+
+        return Math.abs(previous.strength() - strength) > GLOW_SYNC_EPSILON
+                || Math.abs(previous.red() - red) > GLOW_SYNC_EPSILON
+                || Math.abs(previous.green() - green) > GLOW_SYNC_EPSILON
+                || Math.abs(previous.blue() - blue) > GLOW_SYNC_EPSILON;
+    }
+
+    private static float lerp(float start, float end, float amount) {
+        return start + (end - start) * amount;
     }
 
     /**

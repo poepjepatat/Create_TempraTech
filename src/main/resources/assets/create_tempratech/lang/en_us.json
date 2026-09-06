@@ -2,5 +2,7 @@
   "itemGroup.create_tempratech": "TempraTech",
   "block.create_tempratech.heat_harvester": "Heat Harvester",
   "block.create_tempratech.heat_pipe": "Heat Pipe",
+  "block.create_tempratech.molten_iron": "Molten Iron",
+  "block.create_tempratech.molten_gold": "Molten Gold",
   "item.create_tempratech.titanium_ingot": "Titanium Ingot"
 }
