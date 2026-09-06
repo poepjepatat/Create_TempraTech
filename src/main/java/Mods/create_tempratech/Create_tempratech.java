@@ -46,7 +46,7 @@ import org.slf4j.Logger;
 public class Create_tempratech {
     // Define mod id in a common place for everything to reference
     public static final String MODID = "create_tempratech";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     // Create a Deferred Register to hold CreativeModeTabs which will all be registered under the "create_tempratech" namespace
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);

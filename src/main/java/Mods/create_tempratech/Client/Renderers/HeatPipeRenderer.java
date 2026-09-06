@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.data.ModelData;
+import static Mods.create_tempratech.Create_tempratech.LOGGER;
 
 public class HeatPipeRenderer implements BlockEntityRenderer<HeatPipeEntity> {
 
@@ -30,6 +31,7 @@ public class HeatPipeRenderer implements BlockEntityRenderer<HeatPipeEntity> {
         BlockState state = blockEntity.getBlockState();
 
         poseStack.pushPose();
+        LOGGER.info("render test");
         blockRenderer.renderSingleBlock(
                 state,
                 poseStack,
@@ -41,4 +43,4 @@ public class HeatPipeRenderer implements BlockEntityRenderer<HeatPipeEntity> {
         );
         poseStack.popPose();
     }
-}   
+}
