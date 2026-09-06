@@ -26,12 +26,4 @@ public class modItems {
     public static final DeferredItem<BlockItem> THERMOMETER
             = ITEMS.registerSimpleBlockItem("thermometer",
             modBlocks.THERMOMETER);
-
-    public static final DeferredItem<BlockItem> MOLTEN_IRON
-            = ITEMS.registerSimpleBlockItem("molten_iron",
-            modBlocks.MOLTEN_IRON);
-
-    public static final DeferredItem<BlockItem> MOLTEN_GOLD
-            = ITEMS.registerSimpleBlockItem("molten_gold",
-            modBlocks.MOLTEN_GOLD);
 }

@@ -5,10 +5,14 @@ import Mods.create_tempratech.Client.Renderers.HeatPipeRenderer;
 import Mods.create_tempratech.Client.Renderers.ThermometerRenderer;
 import Mods.create_tempratech.Create_tempratech;
 import Mods.create_tempratech.Regs.modBlockEntities;
+import Mods.create_tempratech.Regs.modFluids;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 
 import static Mods.create_tempratech.Create_tempratech.LOGGER;
 
@@ -37,5 +41,34 @@ import static Mods.create_tempratech.Create_tempratech.LOGGER;
                 modBlockEntities.HEAT_HARVESTER_ENTITY.get(),
                 HeatHarvesterRenderer::new
         );
+    }
+
+    public static void registerFluidExtensions(
+            RegisterClientExtensionsEvent event
+    ) {
+        ResourceLocation stillTexture =
+                ResourceLocation.withDefaultNamespace("block/lava_still");
+        ResourceLocation flowingTexture =
+                ResourceLocation.withDefaultNamespace("block/lava_flow");
+
+        modFluids.all().forEach(fluid -> event.registerFluidType(
+                new IClientFluidTypeExtensions() {
+                    @Override
+                    public ResourceLocation getStillTexture() {
+                        return stillTexture;
+                    }
+
+                    @Override
+                    public ResourceLocation getFlowingTexture() {
+                        return flowingTexture;
+                    }
+
+                    @Override
+                    public int getTintColor() {
+                        return fluid.tintColor();
+                    }
+                },
+                fluid.type().get()
+        ));
     }
 }

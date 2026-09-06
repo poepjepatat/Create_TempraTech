@@ -5,7 +5,9 @@ import Mods.create_tempratech.Network.ModPayloads;
 import Mods.create_tempratech.Regs.ModAttachments;
 import Mods.create_tempratech.Regs.modBlockEntities;
 import Mods.create_tempratech.Regs.modBlocks;
+import Mods.create_tempratech.Regs.modFluids;
 import Mods.create_tempratech.Regs.modItems;
+import Mods.create_tempratech.ThermalSystem.Simulation.ThermalHazardHandler;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalServerTickHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -60,8 +62,7 @@ public class Create_tempratech {
         output.accept(modItems.TITANIUM_INGOT);
         output.accept(modItems.HEAT_PIPE);
         output.accept(modItems.THERMOMETER);
-        output.accept(modItems.MOLTEN_IRON);
-        output.accept(modItems.MOLTEN_GOLD);
+        modFluids.all().forEach(fluid -> output.accept(fluid.bucket()));
     }).build());
 
 
@@ -75,6 +76,9 @@ public class Create_tempratech {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModPayloads::register);
+
+        // Load/register molten fluids before the block and item registries are frozen.
+        modFluids.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         modBlocks.BLOCKS.register(modEventBus);
@@ -90,11 +94,13 @@ public class Create_tempratech {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(ThermalServerTickHandler.class);
+        NeoForge.EVENT_BUS.register(ThermalHazardHandler.class);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 
         modEventBus.addListener(ClientRegister::registerRenderers);
+        modEventBus.addListener(ClientRegister::registerFluidExtensions);
     }
 
 
