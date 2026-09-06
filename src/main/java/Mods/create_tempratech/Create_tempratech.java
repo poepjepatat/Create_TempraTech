@@ -6,7 +6,6 @@ import Mods.create_tempratech.Regs.ModAttachments;
 import Mods.create_tempratech.Regs.modBlockEntities;
 import Mods.create_tempratech.Regs.modBlocks;
 import Mods.create_tempratech.Regs.modItems;
-import Mods.create_tempratech.ThermalSystem.Simulation.ThermalTemperatureInteractionHandler;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalServerTickHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -61,6 +60,8 @@ public class Create_tempratech {
         output.accept(modItems.TITANIUM_INGOT);
         output.accept(modItems.HEAT_PIPE);
         output.accept(modItems.THERMOMETER);
+        output.accept(modItems.MOLTEN_IRON);
+        output.accept(modItems.MOLTEN_GOLD);
     }).build());
 
 
@@ -89,7 +90,6 @@ public class Create_tempratech {
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(ThermalServerTickHandler.class);
-        NeoForge.EVENT_BUS.register(ThermalTemperatureInteractionHandler.class);
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

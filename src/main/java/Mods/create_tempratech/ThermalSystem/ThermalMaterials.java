@@ -1,5 +1,8 @@
 package Mods.create_tempratech.ThermalSystem;
 
+import Mods.create_tempratech.Create_tempratech;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
@@ -15,6 +18,17 @@ public final class ThermalMaterials {
      */
     public static final double DEFAULT_TEMPERATURE_K = 293.15;
 
+    private static final ResourceLocation MOLTEN_IRON_ID =
+            ResourceLocation.fromNamespaceAndPath(
+                    Create_tempratech.MODID,
+                    "molten_iron"
+            );
+    private static final ResourceLocation MOLTEN_GOLD_ID =
+            ResourceLocation.fromNamespaceAndPath(
+                    Create_tempratech.MODID,
+                    "molten_gold"
+            );
+
     public static final Map<Block, ThermalMaterial> PROPERTIES =
             new HashMap<>();
 
@@ -28,6 +42,24 @@ public final class ThermalMaterials {
                     1000.0,
                     1.0,
                     500.0
+            );
+
+    public static final ThermalMaterial MOLTEN_IRON =
+            new ThermalMaterial(
+                    1873.15,
+                    820.0,
+                    7000.0,
+                    30.0,
+                    525.0
+            );
+
+    public static final ThermalMaterial MOLTEN_GOLD =
+            new ThermalMaterial(
+                    1473.15,
+                    150.0,
+                    17300.0,
+                    100.0,
+                    450.0
             );
 
     static {
@@ -50,6 +82,17 @@ public final class ThermalMaterials {
                         7874.0,
                         80.0,
                         525.0
+                )
+        );
+
+        PROPERTIES.put(
+                Blocks.GOLD_BLOCK,
+                new ThermalMaterial(
+                        293.15,
+                        129.0,
+                        19300.0,
+                        318.0,
+                        450.0
                 )
         );
 
@@ -98,13 +141,24 @@ public final class ThermalMaterials {
         );
 
         PROPERTIES.put(
+                Blocks.BASALT,
+                new ThermalMaterial(
+                        293.15,
+                        840.0,
+                        3000.0,
+                        1.7,
+                        525.0
+                )
+        );
+
+        PROPERTIES.put(
                 Blocks.LAVA,
                 new ThermalMaterial(
                         1273.15,
                         1500.0,
                         2700.0,
                         2.0,
-                        0.0
+                        500.0
                 )
         );
     }
@@ -117,6 +171,16 @@ public final class ThermalMaterials {
      * Unknown blocks use the generic default material.
      */
     public static ThermalMaterial getMaterial(Block block) {
+        ResourceLocation id = BuiltInRegistries.BLOCK.getKey(block);
+
+        if (MOLTEN_IRON_ID.equals(id)) {
+            return MOLTEN_IRON;
+        }
+
+        if (MOLTEN_GOLD_ID.equals(id)) {
+            return MOLTEN_GOLD;
+        }
+
         return PROPERTIES.getOrDefault(block, DEFAULT);
     }
 }

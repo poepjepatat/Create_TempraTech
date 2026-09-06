@@ -5,6 +5,8 @@ import net.minecraft.world.level.Level;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
+import java.util.function.BiConsumer;
 
 public final class GlowManager {
 
@@ -21,7 +23,7 @@ public final class GlowManager {
      * even if both blocks are the exact same block.
      */
     private static final Map<Level, Map<BlockPos, GlowData>> GLOW_DATA =
-            new HashMap<>();
+            new WeakHashMap<>();
 
     public static void setGlow(Level level, BlockPos pos, float strength) {
         setGlow(level, pos, strength, 1.0F, 1.0F, 1.0F);
@@ -41,11 +43,16 @@ public final class GlowManager {
 
         strength = Math.max(0.0F, strength);
 
+        if (strength == 0.0F) {
+            removeGlow(level, pos);
+            return;
+        }
+
         GlowData data = new GlowData(
                 strength,
-                red,
-                green,
-                blue
+                clamp01(red),
+                clamp01(green),
+                clamp01(blue)
         );
 
         GLOW_DATA
@@ -99,6 +106,21 @@ public final class GlowManager {
         }
     }
 
+    public static void forEach(
+            Level level,
+            BiConsumer<BlockPos, GlowData> consumer
+    ) {
+        if (level == null || consumer == null) {
+            return;
+        }
+
+        Map<BlockPos, GlowData> worldData = GLOW_DATA.get(level);
+
+        if (worldData != null) {
+            worldData.forEach(consumer);
+        }
+    }
+
     public static void clear(Level level) {
         if (level != null) {
             GLOW_DATA.remove(level);
@@ -107,6 +129,10 @@ public final class GlowManager {
 
     public static void clearAll() {
         GLOW_DATA.clear();
+    }
+
+    private static float clamp01(float value) {
+        return Math.max(0.0F, Math.min(1.0F, value));
     }
 
     public record GlowData(
