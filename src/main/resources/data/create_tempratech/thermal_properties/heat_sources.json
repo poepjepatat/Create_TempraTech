@@ -1,0 +1,261 @@
+{
+  "priority": 200,
+  "rules": [
+    {
+      "match": {
+        "blocks": [
+          "minecraft:furnace"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 6000000,
+          "max_temperature_k": 1100.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:blast_furnace"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 12000000,
+          "max_temperature_k": 1800.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:smoker"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 5000000,
+          "max_temperature_k": 950.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:campfire"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 2500000,
+          "max_temperature_k": 900.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:soul_campfire"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 3000000,
+          "max_temperature_k": 1100.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "tags": [
+          "minecraft:candles",
+          "minecraft:candle_cakes"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 120000,
+          "max_temperature_k": 500.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:torch",
+          "minecraft:wall_torch"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 180000,
+          "max_temperature_k": 550.0
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:redstone_torch",
+          "minecraft:redstone_wall_torch"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 150000,
+          "max_temperature_k": 500.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:redstone_lamp"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 350000,
+          "max_temperature_k": 450.0,
+          "when": {
+            "lit": "true"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:magma_block"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 5000000,
+          "max_temperature_k": 900.0
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:lava"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 20000000,
+          "max_temperature_k": 1273.15
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:fire"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 1200000,
+          "max_temperature_k": 1200.0
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "minecraft:soul_fire"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 1500000,
+          "max_temperature_k": 1500.0
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "create:blaze_burner"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 2000000,
+          "max_temperature_k": 650.0,
+          "when": {
+            "blaze": "smouldering"
+          }
+        },
+        {
+          "power_watts": 5000000,
+          "max_temperature_k": 950.0,
+          "when": {
+            "blaze": "fading"
+          }
+        },
+        {
+          "power_watts": 10000000,
+          "max_temperature_k": 1350.0,
+          "when": {
+            "blaze": "kindled"
+          }
+        },
+        {
+          "power_watts": 18000000,
+          "max_temperature_k": 1800.0,
+          "when": {
+            "blaze": "seething"
+          }
+        }
+      ]
+    },
+    {
+      "match": {
+        "blocks": [
+          "create:lit_blaze_burner"
+        ]
+      },
+      "heat_sources": [
+        {
+          "power_watts": 8000000,
+          "max_temperature_k": 1200.0,
+          "when": {
+            "flame_type": "regular"
+          }
+        },
+        {
+          "power_watts": 10000000,
+          "max_temperature_k": 1450.0,
+          "when": {
+            "flame_type": "soul"
+          }
+        }
+      ]
+    }
+  ]
+}
