@@ -1,0 +1,157 @@
+{
+  "priority": 20,
+  "rules": [
+    {
+      "priority": 20,
+      "match": {
+        "blocks": [
+          "create:schematic_table",
+          "create:cogwheel",
+          "create:large_cogwheel",
+          "create:water_wheel",
+          "create:large_water_wheel",
+          "create:hand_crank",
+          "create:turntable",
+          "create:cuckoo_clock",
+          "create:mysterious_cuckoo_clock"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 1500,
+        "density": 900,
+        "conductivity": 0.22,
+        "glow_temperature_c": 280
+      }
+    },
+    {
+      "priority": 30,
+      "match": {
+        "blocks": [
+          "create:copper_casing",
+          "create:fluid_pipe",
+          "create:smart_fluid_pipe",
+          "create:mechanical_pump",
+          "create:fluid_valve",
+          "create:fluid_tank",
+          "create:hose_pulley",
+          "create:item_drain",
+          "create:spout",
+          "create:copper_backtank"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 385,
+        "density": 8200,
+        "conductivity": 330.0,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "priority": 30,
+      "match": {
+        "blocks": [
+          "create:brass_casing",
+          "create:brass_encased_shaft",
+          "create:brass_encased_cogwheel",
+          "create:brass_encased_large_cogwheel",
+          "create:brass_funnel",
+          "create:brass_tunnel",
+          "create:mechanical_arm",
+          "create:mechanical_crafter",
+          "create:stock_ticker",
+          "create:redstone_requester",
+          "create:packager",
+          "create:repackager"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 380,
+        "density": 8500,
+        "conductivity": 110.0,
+        "glow_temperature_c": 480
+      }
+    },
+    {
+      "priority": 30,
+      "match": {
+        "blocks": [
+          "create:andesite_casing",
+          "create:andesite_encased_shaft",
+          "create:andesite_encased_cogwheel",
+          "create:andesite_encased_large_cogwheel",
+          "create:shaft",
+          "create:gearbox",
+          "create:clutch",
+          "create:gearshift",
+          "create:sequenced_gearshift",
+          "create:encased_chain_drive",
+          "create:adjustable_chain_gearshift",
+          "create:encased_fan",
+          "create:nozzle",
+          "create:mechanical_press",
+          "create:mechanical_mixer",
+          "create:basin",
+          "create:millstone",
+          "create:crushing_wheel",
+          "create:mechanical_drill",
+          "create:mechanical_saw",
+          "create:deployer",
+          "create:rotation_speed_controller",
+          "create:flywheel",
+          "create:mechanical_bearing",
+          "create:windmill_bearing",
+          "create:clockwork_bearing",
+          "create:mechanical_piston",
+          "create:sticky_mechanical_piston",
+          "create:gantry_shaft",
+          "create:gantry_carriage",
+          "create:rope_pulley",
+          "create:elevator_pulley",
+          "create:elevator_contact",
+          "create:cart_assembler"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 620,
+        "density": 4200,
+        "conductivity": 18.0,
+        "glow_temperature_c": 520
+      }
+    },
+    {
+      "priority": 35,
+      "match": {
+        "blocks": [
+          "create:belt"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 1800,
+        "density": 1200,
+        "conductivity": 0.15,
+        "glow_temperature_c": 180
+      }
+    },
+    {
+      "priority": 40,
+      "match": {
+        "blocks": [
+          "create:blaze_burner",
+          "create:lit_blaze_burner"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 500,
+        "density": 6500,
+        "conductivity": 35.0,
+        "glow_temperature_c": 450
+      }
+    }
+  ]
+}

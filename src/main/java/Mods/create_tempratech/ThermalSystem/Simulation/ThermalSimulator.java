@@ -2,7 +2,9 @@ package Mods.create_tempratech.ThermalSystem.Simulation;
 
 import Mods.create_tempratech.Client.Glowing.GlowManager;
 import Mods.create_tempratech.Network.ThermalGlowPayload;
+import Mods.create_tempratech.ThermalSystem.ThermalHeatSource;
 import Mods.create_tempratech.ThermalSystem.ThermalMaterial;
+import Mods.create_tempratech.ThermalSystem.ThermalMaterials;
 import Mods.create_tempratech.ThermalSystem.ThermalWorld;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -12,6 +14,9 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.extensions.IBlockGetterExtension;
 import net.neoforged.neoforge.common.world.AuxiliaryLightManager;
 import net.neoforged.neoforge.network.PacketDistributor;
+
+import java.util.HashSet;
+import java.util.Set;
 
 public final class ThermalSimulator {
 
@@ -47,6 +52,7 @@ public final class ThermalSimulator {
 
     public void tick(ServerLevel level) {
         int operations = 0;
+        Set<Long> activeHeatSources = new HashSet<>();
 
         while (!queue.isEmpty() && operations < MAX_OPERATIONS_PER_TICK) {
             long packedPos = queue.poll();
@@ -66,10 +72,79 @@ public final class ThermalSimulator {
                 );
             }
 
+            BlockState state = level.getBlockState(pos);
+            if (ThermalMaterials.getActiveHeatSource(state) != null) {
+                activeHeatSources.add(packedPos);
+            }
+
             updateGlow(level, pos);
             simulateBlock(level, pos);
             operations++;
         }
+
+        /*
+         * Heat sources are applied after the conduction queue has finished.
+         * ThermalWorld.addEnergy() activates the source and its neighbors, so
+         * doing this here guarantees one source injection per game tick rather
+         * than repeatedly injecting while the same queue is being processed.
+         */
+        for (long packedPos : activeHeatSources) {
+            applyHeatSource(level, BlockPos.of(packedPos));
+        }
+    }
+
+    private void applyHeatSource(
+            ServerLevel level,
+            BlockPos pos
+    ) {
+        if (!level.hasChunkAt(pos)) {
+            return;
+        }
+
+        BlockState state = level.getBlockState(pos);
+        ThermalHeatSource heatSource =
+                ThermalMaterials.getActiveHeatSource(state);
+
+        if (heatSource == null) {
+            return;
+        }
+
+        ThermalMaterial material =
+                ThermalWorld.getMaterial(level, pos);
+        double currentEnergy =
+                ThermalWorld.getEnergy(level, pos);
+        double targetEnergy =
+                material.energyFromTemperature(
+                        heatSource.maxTemperatureK(),
+                        ThermalWorld.BLOCK_VOLUME_M3
+                );
+        double remainingEnergy =
+                targetEnergy - currentEnergy;
+
+        if (remainingEnergy > 0.0) {
+            double generatedThisTick =
+                    heatSource.powerWatts() * DELTA_TIME;
+            double generatedEnergy =
+                    Math.min(
+                            generatedThisTick,
+                            remainingEnergy
+                    );
+
+            if (generatedEnergy > 0.0) {
+                ThermalWorld.addEnergy(
+                        level,
+                        pos,
+                        generatedEnergy
+                );
+            }
+        }
+
+        /*
+         * Keep a currently active heater alive even when it has reached its
+         * target temperature, so it can replace heat lost to surrounding
+         * blocks and air on later ticks.
+         */
+        activate(pos);
     }
 
     private void updateGlow(ServerLevel level, BlockPos pos) {

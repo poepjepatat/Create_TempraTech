@@ -9,6 +9,7 @@ import Mods.create_tempratech.Regs.modFluids;
 import Mods.create_tempratech.Regs.modItems;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalHazardHandler;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalServerTickHandler;
+import Mods.create_tempratech.ThermalSystem.ThermalPropertiesReloadListener;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -69,6 +70,7 @@ public class Create_tempratech {
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(ThermalServerTickHandler.class);
         NeoForge.EVENT_BUS.register(ThermalHazardHandler.class);
+        NeoForge.EVENT_BUS.register(ThermalPropertiesReloadListener.class);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
 

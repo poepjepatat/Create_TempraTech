@@ -1,0 +1,61 @@
+{
+  "priority": 0,
+  "default_material": {
+    "default_temperature_k": 293.15,
+    "specific_heat": 1000,
+    "density": 1000,
+    "conductivity": 1.0,
+    "glow_temperature_c": 500
+  },
+  "air_material": {
+    "default_temperature_k": 293.15,
+    "specific_heat": 1005,
+    "density": 1.225,
+    "conductivity": 0.026,
+    "glow_temperature_c": null
+  },
+  "rules": [
+    {
+      "match": {
+        "namespaces": [
+          "minecraft"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 900,
+        "density": 2200,
+        "conductivity": 1.5,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "match": {
+        "namespaces": [
+          "create"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 500,
+        "density": 5200,
+        "conductivity": 28.0,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "match": {
+        "namespaces": [
+          "create_tempratech"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 520,
+        "density": 4500,
+        "conductivity": 35.0,
+        "glow_temperature_c": 500
+      }
+    }
+  ]
+}

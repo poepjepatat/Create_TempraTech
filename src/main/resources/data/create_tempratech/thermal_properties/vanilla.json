@@ -1,0 +1,331 @@
+{
+  "priority": 20,
+  "rules": [
+    {
+      "priority": 10,
+      "match": {
+        "tags": [
+          "minecraft:logs",
+          "minecraft:planks"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 1700,
+        "density": 700,
+        "conductivity": 0.16,
+        "glow_temperature_c": 260
+      }
+    },
+    {
+      "priority": 10,
+      "match": {
+        "tags": [
+          "minecraft:leaves"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 1800,
+        "density": 350,
+        "conductivity": 0.12,
+        "glow_temperature_c": 180
+      }
+    },
+    {
+      "priority": 10,
+      "match": {
+        "tags": [
+          "minecraft:wool"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 1400,
+        "density": 130,
+        "conductivity": 0.04,
+        "glow_temperature_c": 180
+      }
+    },
+    {
+      "priority": 10,
+      "match": {
+        "tags": [
+          "minecraft:base_stone_overworld"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 840,
+        "density": 2700,
+        "conductivity": 2.5,
+        "glow_temperature_c": 525
+      }
+    },
+    {
+      "priority": 10,
+      "match": {
+        "tags": [
+          "minecraft:base_stone_nether"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 315.15,
+        "specific_heat": 850,
+        "density": 2500,
+        "conductivity": 1.7,
+        "glow_temperature_c": 525
+      }
+    },
+    {
+      "priority": 20,
+      "match": {
+        "blocks": [
+          "minecraft:dirt",
+          "minecraft:grass_block",
+          "minecraft:coarse_dirt",
+          "minecraft:rooted_dirt",
+          "minecraft:podzol",
+          "minecraft:mycelium",
+          "minecraft:mud",
+          "minecraft:clay"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 900,
+        "density": 1550,
+        "conductivity": 1.3,
+        "glow_temperature_c": 450
+      }
+    },
+    {
+      "priority": 20,
+      "match": {
+        "blocks": [
+          "minecraft:sand",
+          "minecraft:red_sand",
+          "minecraft:gravel",
+          "minecraft:sandstone",
+          "minecraft:red_sandstone"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 830,
+        "density": 1650,
+        "conductivity": 1.8,
+        "glow_temperature_c": 650
+      }
+    },
+    {
+      "priority": 20,
+      "match": {
+        "blocks": [
+          "minecraft:glass",
+          "minecraft:tinted_glass",
+          "minecraft:glass_pane"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 840,
+        "density": 2500,
+        "conductivity": 1.05,
+        "glow_temperature_c": 550
+      }
+    },
+    {
+      "priority": 30,
+      "match": {
+        "blocks": [
+          "minecraft:water",
+          "minecraft:ice",
+          "minecraft:packed_ice",
+          "minecraft:blue_ice",
+          "minecraft:snow_block",
+          "minecraft:powder_snow"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 278.15,
+        "specific_heat": 3000,
+        "density": 950,
+        "conductivity": 1.0,
+        "glow_temperature_c": null
+      }
+    },
+    {
+      "priority": 40,
+      "match": {
+        "blocks": [
+          "minecraft:iron_block",
+          "minecraft:anvil",
+          "minecraft:chipped_anvil",
+          "minecraft:damaged_anvil",
+          "minecraft:iron_bars"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 449,
+        "density": 7874,
+        "conductivity": 80.0,
+        "glow_temperature_c": 525
+      }
+    },
+    {
+      "priority": 40,
+      "match": {
+        "blocks": [
+          "minecraft:gold_block"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 129,
+        "density": 19300,
+        "conductivity": 318.0,
+        "glow_temperature_c": 450
+      }
+    },
+    {
+      "priority": 40,
+      "match": {
+        "blocks": [
+          "minecraft:copper_block",
+          "minecraft:exposed_copper",
+          "minecraft:weathered_copper",
+          "minecraft:oxidized_copper",
+          "minecraft:cut_copper",
+          "minecraft:exposed_cut_copper",
+          "minecraft:weathered_cut_copper",
+          "minecraft:oxidized_cut_copper"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 385,
+        "density": 8960,
+        "conductivity": 401.0,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "priority": 40,
+      "match": {
+        "blocks": [
+          "minecraft:obsidian",
+          "minecraft:crying_obsidian",
+          "minecraft:basalt",
+          "minecraft:polished_basalt",
+          "minecraft:blackstone"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 800,
+        "density": 3000,
+        "conductivity": 1.7,
+        "glow_temperature_c": 700
+      }
+    },
+    {
+      "priority": 50,
+      "match": {
+        "blocks": [
+          "minecraft:furnace",
+          "minecraft:blast_furnace",
+          "minecraft:smoker"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 840,
+        "density": 2600,
+        "conductivity": 1.6,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "priority": 50,
+      "match": {
+        "blocks": [
+          "minecraft:campfire",
+          "minecraft:soul_campfire"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 293.15,
+        "specific_heat": 1200,
+        "density": 900,
+        "conductivity": 0.35,
+        "glow_temperature_c": 320
+      }
+    },
+    {
+      "priority": 60,
+      "match": {
+        "blocks": [
+          "minecraft:magma_block"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 650.0,
+        "specific_heat": 840,
+        "density": 3000,
+        "conductivity": 1.7,
+        "glow_temperature_c": 350
+      }
+    },
+    {
+      "priority": 60,
+      "match": {
+        "blocks": [
+          "minecraft:lava"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1273.15,
+        "specific_heat": 1500,
+        "density": 2700,
+        "conductivity": 2.0,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "priority": 60,
+      "match": {
+        "blocks": [
+          "minecraft:fire",
+          "minecraft:soul_fire"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 700.0,
+        "specific_heat": 1100,
+        "density": 1.3,
+        "conductivity": 0.08,
+        "glow_temperature_c": null
+      }
+    },
+    {
+      "priority": 60,
+      "match": {
+        "blocks": [
+          "minecraft:torch",
+          "minecraft:wall_torch",
+          "minecraft:redstone_torch",
+          "minecraft:redstone_wall_torch"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 420.0,
+        "specific_heat": 1700,
+        "density": 550,
+        "conductivity": 0.12,
+        "glow_temperature_c": 250
+      }
+    }
+  ]
+}
