@@ -1,0 +1,44 @@
+{
+  "targets": [
+    "thermal_mask",
+    "thermal_blur_a",
+    "thermal_blur_b",
+    "thermal_scene"
+  ],
+  "passes": [
+    {
+      "name": "minecraft:blit",
+      "intarget": "minecraft:main",
+      "outtarget": "thermal_scene"
+    },
+    {
+      "name": "minecraft:box_blur",
+      "intarget": "thermal_mask",
+      "outtarget": "thermal_blur_a",
+      "use_linear_filter": true,
+      "uniforms": [
+        { "name": "BlurDir", "values": [1.0, 0.0] },
+        { "name": "Radius", "values": [8.0] }
+      ]
+    },
+    {
+      "name": "minecraft:box_blur",
+      "intarget": "thermal_blur_a",
+      "outtarget": "thermal_blur_b",
+      "use_linear_filter": true,
+      "uniforms": [
+        { "name": "BlurDir", "values": [0.0, 1.0] },
+        { "name": "Radius", "values": [8.0] }
+      ]
+    },
+    {
+      "name": "create_tempratech:thermal_composite",
+      "intarget": "thermal_scene",
+      "outtarget": "minecraft:main",
+      "auxtargets": [
+        { "name": "HeatSampler", "id": "thermal_blur_b" },
+        { "name": "RawHeatSampler", "id": "thermal_mask" }
+      ]
+    }
+  ]
+}

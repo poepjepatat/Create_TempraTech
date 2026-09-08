@@ -5,6 +5,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,15 @@ public final class ThermalMaterials {
 
     private static final Map<ResourceLocation, ThermalMaterial>
             MOLTEN_PROPERTIES = new HashMap<>();
+
+    public static final ThermalMaterial AIR =
+            new ThermalMaterial(
+                    DEFAULT_TEMPERATURE_K,
+                    1005.0,
+                    1.225,
+                    0.026,
+                    Double.POSITIVE_INFINITY
+            );
 
     public static final ThermalMaterial DEFAULT =
             new ThermalMaterial(
@@ -84,6 +94,14 @@ public final class ThermalMaterials {
     }
 
     private ThermalMaterials() {
+    }
+
+    public static ThermalMaterial getMaterial(BlockState state) {
+        if (state.isAir()) {
+            return AIR;
+        }
+
+        return getMaterial(state.getBlock());
     }
 
     public static ThermalMaterial getMaterial(Block block) {

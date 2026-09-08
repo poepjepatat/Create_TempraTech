@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "equipment",
+  "ingredients": [
+    { "item": "create:goggles" },
+    { "item": "create_tempratech:thermometer" },
+    { "item": "create_tempratech:titanium_ingot" }
+  ],
+  "result": {
+    "id": "create_tempratech:thermal_goggles",
+    "count": 1
+  }
+}

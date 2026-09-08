@@ -18,5 +18,17 @@ public final class ModPayloads {
                 ThermalGlowPayload.STREAM_CODEC,
                 ThermalGlowPayload::handle
         );
+
+        registrar.playToServer(
+                ThermalProbeRequestPayload.TYPE,
+                ThermalProbeRequestPayload.STREAM_CODEC,
+                ThermalProbeRequestPayload::handle
+        );
+
+        registrar.playToClient(
+                ThermalProbeResponsePayload.TYPE,
+                ThermalProbeResponsePayload.STREAM_CODEC,
+                ThermalProbeResponsePayload::handle
+        );
     }
 }
