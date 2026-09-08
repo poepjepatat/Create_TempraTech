@@ -97,8 +97,15 @@ public final class GlowRenderer {
         maskTarget.copyDepthFrom(mainTarget);
         maskTarget.bindWrite(true);
 
+        // AFTER_LEVEL is dispatched without a live world PoseStack on NeoForge
+        // 1.21.1. Rebuild the exact world transform from the matrices captured by
+        // the event. Applying the model-view first and then camera translation
+        // keeps the thermal mask locked to the same screen-space position as the
+        // block geometry, including camera yaw/pitch and view bobbing.
         PoseStack poseStack = new PoseStack();
+        poseStack.mulPose(event.getModelViewMatrix());
         poseStack.translate(-camera.x, -camera.y, -camera.z);
+
         MultiBufferSource.BufferSource buffers =
                 minecraft.renderBuffers().bufferSource();
 
