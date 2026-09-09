@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.item.ArmorItem;
 
-public final class ThermalGogglesItem extends Item implements Equipable {
+public class ThermalGogglesItem extends Item implements Equipable {
 
     public ThermalGogglesItem(Properties properties) {
         super(properties.stacksTo(1));

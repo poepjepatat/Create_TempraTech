@@ -2,6 +2,7 @@ package Mods.create_tempratech.Regs;
 
 import Mods.create_tempratech.Create_tempratech;
 import Mods.create_tempratech.Regs.Items.ThermalGogglesItem;
+import Mods.create_tempratech.Regs.Items.VisualThermalGogglesItem;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -31,4 +32,8 @@ public class modItems {
     public static final DeferredItem<ThermalGogglesItem> THERMAL_GOGGLES
             = ITEMS.register("thermal_goggles",
             () -> new ThermalGogglesItem(new Item.Properties()));
+
+    public static final DeferredItem<VisualThermalGogglesItem> VISUAL_THERMAL_GOGGLES
+            = ITEMS.register("visual_thermal_goggles",
+            () -> new VisualThermalGogglesItem(new Item.Properties()));
 }

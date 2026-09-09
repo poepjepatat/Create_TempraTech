@@ -112,10 +112,11 @@ public final class modFluids {
 
     public static final class MoltenFluidDefinition {
         private final String materialName;
+        private final int viscosity;
         private final int tintColor;
         private final DeferredHolder<FluidType, FluidType> type;
-        private final DeferredHolder<Fluid, BaseFlowingFluid.Source> source;
-        private final DeferredHolder<Fluid, BaseFlowingFluid.Flowing> flowing;
+        private final DeferredHolder<Fluid, ConservativeFlowingFluid.Source> source;
+        private final DeferredHolder<Fluid, ConservativeFlowingFluid.Flowing> flowing;
         private final DeferredBlock<MoltenLiquidBlock> block;
         private final DeferredItem<BucketItem> bucket;
 
@@ -127,6 +128,7 @@ public final class modFluids {
                 int tintColor
         ) {
             this.materialName = materialName;
+            this.viscosity = viscosity;
             this.tintColor = tintColor;
 
             String fluidName = "molten_" + materialName;
@@ -145,17 +147,22 @@ public final class modFluids {
                                     .temperature(temperatureK)
                                     .density(density)
                                     .viscosity(viscosity)
+                                    .canPushEntity(true)
+                                    .canSwim(false)
+                                    .canDrown(true)
+                                    .canExtinguish(false)
+                                    .canConvertToSource(false)
                     )
             );
 
             this.source = FLUIDS.register(
                     fluidName,
-                    () -> new BaseFlowingFluid.Source(createProperties())
+                    () -> new ConservativeFlowingFluid.Source(createProperties())
             );
 
             this.flowing = FLUIDS.register(
                     "flowing_" + fluidName,
-                    () -> new BaseFlowingFluid.Flowing(createProperties())
+                    () -> new ConservativeFlowingFluid.Flowing(createProperties())
             );
 
             this.block = modBlocks.BLOCKS.register(
@@ -183,9 +190,20 @@ public final class modFluids {
                     .block(block)
                     .bucket(bucket)
                     .slopeFindDistance(2)
-                    .levelDecreasePerBlock(2)
-                    .tickRate(20)
+                    .levelDecreasePerBlock(levelDecreasePerBlock())
+                    .tickRate(flowTickRate())
                     .explosionResistance(100.0F);
+        }
+
+        private int flowTickRate() {
+            // Viscosity is in mPa*s. More viscous fluids update less often.
+            return Math.max(10, Math.min(40, 8 + viscosity / 500));
+        }
+
+        private int levelDecreasePerBlock() {
+            // Preserve long lava-like flows while making thick fluids lose
+            // more height per horizontal block.
+            return Math.max(1, Math.min(4, 1 + viscosity / 5000));
         }
 
         public String materialName() {
@@ -200,11 +218,11 @@ public final class modFluids {
             return type;
         }
 
-        public DeferredHolder<Fluid, BaseFlowingFluid.Source> source() {
+        public DeferredHolder<Fluid, ConservativeFlowingFluid.Source> source() {
             return source;
         }
 
-        public DeferredHolder<Fluid, BaseFlowingFluid.Flowing> flowing() {
+        public DeferredHolder<Fluid, ConservativeFlowingFluid.Flowing> flowing() {
             return flowing;
         }
 

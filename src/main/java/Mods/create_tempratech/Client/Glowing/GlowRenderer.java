@@ -1,6 +1,7 @@
 package Mods.create_tempratech.Client.Glowing;
 
 import Mods.create_tempratech.Create_tempratech;
+import Mods.create_tempratech.Regs.Items.VisualThermalGogglesItem;
 import com.mojang.blaze3d.pipeline.RenderTarget;
 import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
@@ -12,6 +13,7 @@ import net.minecraft.client.renderer.debug.DebugRenderer;
 import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -22,7 +24,10 @@ import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.BiConsumer;
 
 @EventBusSubscriber(
         modid = Create_tempratech.MODID,
@@ -30,12 +35,15 @@ import java.util.List;
 )
 public final class GlowRenderer {
 
-    private static final double MAX_RENDER_DISTANCE_SQR = 64.0 * 64.0;
+    private static final double MAX_GLOW_RENDER_DISTANCE_SQR = 64.0 * 64.0;
+    private static final double MAX_VISUAL_RENDER_DISTANCE_SQR = 24.0 * 24.0;
     private static final ResourceLocation POST_CHAIN =
             ResourceLocation.fromNamespaceAndPath(
                     Create_tempratech.MODID,
                     "shaders/post/thermal_bloom.json"
             );
+    private static final Map<BlockState, List<AABB>> SHAPE_CACHE =
+            new HashMap<>();
 
     private static PostChain postChain;
     private static int postWidth = -1;
@@ -58,13 +66,24 @@ public final class GlowRenderer {
             return;
         }
 
+        boolean visualGoggles = minecraft.player != null
+                && minecraft.player.getItemBySlot(EquipmentSlot.HEAD)
+                .getItem() instanceof VisualThermalGogglesItem;
+
         Vec3 camera = event.getCamera().getPosition();
         List<BlockPos> stalePositions = new ArrayList<>();
         List<VisibleGlow> visibleGlows = new ArrayList<>();
 
-        GlowManager.forEach(level, (pos, data) -> {
+        if (!visualGoggles) {
+            VisualThermalManager.clear(level);
+        }
+
+        BiConsumer<BlockPos, GlowManager.GlowData> addVisibleGlow =
+                (pos, data) -> {
             if (!level.hasChunkAt(pos) || level.getBlockState(pos).isAir()) {
-                stalePositions.add(pos);
+                if (!visualGoggles) {
+                    stalePositions.add(pos);
+                }
                 return;
             }
 
@@ -72,14 +91,26 @@ public final class GlowRenderer {
             double dy = pos.getY() + 0.5 - camera.y;
             double dz = pos.getZ() + 0.5 - camera.z;
 
-            if (dx * dx + dy * dy + dz * dz > MAX_RENDER_DISTANCE_SQR) {
+            double maxDistanceSqr = visualGoggles
+                    ? MAX_VISUAL_RENDER_DISTANCE_SQR
+                    : MAX_GLOW_RENDER_DISTANCE_SQR;
+
+            if (dx * dx + dy * dy + dz * dz > maxDistanceSqr) {
                 return;
             }
 
             visibleGlows.add(new VisibleGlow(pos.immutable(), data));
-        });
+        };
 
-        stalePositions.forEach(pos -> GlowManager.removeGlow(level, pos));
+        if (visualGoggles) {
+            VisualThermalManager.forEach(level, addVisibleGlow);
+        } else {
+            GlowManager.forEach(level, addVisibleGlow);
+        }
+
+        if (!visualGoggles) {
+            stalePositions.forEach(pos -> GlowManager.removeGlow(level, pos));
+        }
 
         if (visibleGlows.isEmpty() || !ensurePostChain(minecraft)) {
             return;
@@ -132,19 +163,16 @@ public final class GlowRenderer {
         BlockPos pos = glow.pos();
         GlowManager.GlowData data = glow.data();
         BlockState state = level.getBlockState(pos);
-        VoxelShape shape = state.getShape(level, pos);
-        List<AABB> boxes = shape.toAabbs();
-
-        if (boxes.isEmpty()) {
-            boxes = List.of(new AABB(0, 0, 0, 1, 1, 1));
-        }
+        List<AABB> boxes = SHAPE_CACHE.computeIfAbsent(
+                state,
+                ignored -> thermalBoxes(level, pos, state)
+        );
 
         float alpha = Math.max(0.08F, Math.min(1.0F, data.strength()));
 
         for (AABB localBox : boxes) {
             AABB worldBox = localBox
-                    .move(pos.getX(), pos.getY(), pos.getZ())
-                    .inflate(0.015);
+                    .move(pos.getX(), pos.getY(), pos.getZ());
 
             // This geometry is written only into the private thermal mask.
             DebugRenderer.renderFilledBox(
@@ -157,6 +185,21 @@ public final class GlowRenderer {
                     alpha
             );
         }
+    }
+
+    private static List<AABB> thermalBoxes(
+            ClientLevel level,
+            BlockPos pos,
+            BlockState state
+    ) {
+        VoxelShape shape = state.getShape(level, pos);
+        List<AABB> boxes = shape.toAabbs().stream()
+                .map(box -> box.inflate(0.015))
+                .toList();
+
+        return boxes.isEmpty()
+                ? List.of(new AABB(-0.015, -0.015, -0.015, 1.015, 1.015, 1.015))
+                : boxes;
     }
 
     private static boolean ensurePostChain(Minecraft minecraft) {

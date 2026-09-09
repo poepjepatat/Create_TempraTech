@@ -52,6 +52,7 @@ public class Create_tempratech {
                         output.accept(modItems.HEAT_PIPE);
                         output.accept(modItems.THERMOMETER);
                         output.accept(modItems.THERMAL_GOGGLES);
+                        output.accept(modItems.VISUAL_THERMAL_GOGGLES);
                         modFluids.all().forEach(fluid -> output.accept(fluid.bucket()));
                     })
                     .build());

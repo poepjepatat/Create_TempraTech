@@ -8,3 +8,23 @@ magicNumber = 42
 magicNumberIntroduction = "The magic number is... "
 #A list of items to log on common setup.
 items = ["minecraft:iron_ingot"]
+#Maximum thermal simulation operations per server tick. Lower this on slower computers.
+# Default: 2500
+# Range: 250 ~ 10000
+thermalOperationsPerTick = 2500
+#Ticks between visual thermal goggle scans.
+# Default: 20
+# Range: 5 ~ 100
+visualScanIntervalTicks = 20
+#Horizontal block radius for visual thermal goggle scans.
+# Default: 12
+# Range: 4 ~ 32
+visualScanHorizontalRadius = 12
+#Vertical block radius for visual thermal goggle scans.
+# Default: 8
+# Range: 3 ~ 20
+visualScanVerticalRadius = 8
+#Maximum thermal blocks sent to a player in one visual scan.
+# Default: 2048
+# Range: 256 ~ 8192
+maxVisualScanEntries = 2048

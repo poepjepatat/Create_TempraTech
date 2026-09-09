@@ -1,6 +1,7 @@
 package Mods.create_tempratech.ThermalSystem.Simulation;
 
 import Mods.create_tempratech.Client.Glowing.GlowManager;
+import Mods.create_tempratech.Config;
 import Mods.create_tempratech.Network.ThermalGlowPayload;
 import Mods.create_tempratech.ThermalSystem.ThermalHeatSource;
 import Mods.create_tempratech.ThermalSystem.ThermalMaterial;
@@ -23,14 +24,17 @@ public final class ThermalSimulator {
     public static final double DELTA_TIME = 1.0 / 20.0;
     public static final double CONTACT_AREA = 1.0;
     public static final double BLOCK_DISTANCE = 1.0;
-    public static final double MIN_ENERGY_TRANSFER = 1.0;
+    /*
+     * Conduction should still happen across small temperature differences.
+     * A one-joule cutoff prevented ordinary blocks from warming each other
+     * because their per-tick transfer is often much smaller than that.
+     */
+    public static final double MIN_ENERGY_TRANSFER = 1.0E-6;
 
     /** Effective natural-convection transfer used at a solid/air boundary. */
     public static final double AIR_SURFACE_TRANSFER_COEFFICIENT = 8.0;
     public static final double MIN_AIR_ENERGY_TRANSFER = 0.02;
     public static final double AIR_DIFFUSION_MULTIPLIER = 4.0;
-
-    public static final int MAX_OPERATIONS_PER_TICK = 10_000;
 
     private static final double GLOW_HEAT_RANGE_C = 1500.0;
     private static final float GLOW_SYNC_EPSILON = 0.02F;
@@ -54,7 +58,8 @@ public final class ThermalSimulator {
         int operations = 0;
         Set<Long> activeHeatSources = new HashSet<>();
 
-        while (!queue.isEmpty() && operations < MAX_OPERATIONS_PER_TICK) {
+        while (!queue.isEmpty()
+                && operations < Config.thermalOperationsPerTick) {
             long packedPos = queue.poll();
             activeSet.deactivate(packedPos);
             BlockPos pos = BlockPos.of(packedPos);

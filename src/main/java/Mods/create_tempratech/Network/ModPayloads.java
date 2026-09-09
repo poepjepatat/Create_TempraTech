@@ -30,5 +30,11 @@ public final class ModPayloads {
                 ThermalProbeResponsePayload.STREAM_CODEC,
                 ThermalProbeResponsePayload::handle
         );
+
+        registrar.playToClient(
+                ThermalVisualPayload.TYPE,
+                ThermalVisualPayload.STREAM_CODEC,
+                ThermalVisualPayload::handle
+        );
     }
 }

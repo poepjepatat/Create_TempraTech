@@ -9,3 +9,25 @@
 /fill -32 85 4 -49 85 20 minecraft:bedrock
 /temperature add 200000
 /temperature add 20000000000000
+/temperature add 1000000000000
+/temperature add -100000000000
+/temperature add -700000000000
+/temperature add 100
+/temperature add 10000
+/temperature add 100000000
+/temperature add 10000000000
+/temperature add 100000000000000
+/temperature add 20000
+/temperature add 2000000
+/temperature add 200000000
+/temperature add 20000000000
+/temperature add 10000000000000
+/temperature add 1000000000000000000000
+/temperature add 20000000
+/temperature add 200000000000000
+/temperature add 200000
+/temperature add 200000000
+/temperature add -10000000
+/temperature add -100000000000
+/temperature add 10000000000
+/temperature add 1000000000000

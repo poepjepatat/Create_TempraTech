@@ -3,6 +3,7 @@
   "block.create_tempratech.heat_harvester": "Heat Harvester",
   "block.create_tempratech.heat_pipe": "Heat Pipe",
   "item.create_tempratech.thermal_goggles": "Thermal Goggles",
+  "item.create_tempratech.visual_thermal_goggles": "Visual Thermal Goggles",
   "gui.create_tempratech.thermal_goggles": "Thermal Scan",
   "gui.create_tempratech.thermal_goggles.scanning": "Temperature: scanning...",
   "gui.create_tempratech.thermal_goggles.temperature": "Temperature: %s °C",
