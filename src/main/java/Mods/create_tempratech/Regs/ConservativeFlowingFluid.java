@@ -166,8 +166,8 @@ public abstract class ConservativeFlowingFluid extends BaseFlowingFluid {
             FluidState targetState,
             net.minecraft.world.level.material.Fluid targetFluid
     ) {
-        if (targetState.getType() == fluid) {
-            return targetState.getAmount() < FluidState.AMOUNT_MAX;
+        if (fluid.isSame(targetState.getType())) {
+            return targetState.getAmount() < FluidState.AMOUNT_FULL;
         }
 
         return fluid.canSpreadTo(
@@ -196,8 +196,8 @@ public abstract class ConservativeFlowingFluid extends BaseFlowingFluid {
         }
 
         FluidState targetState = level.getFluidState(target);
-        int capacity = targetState.getType() == fluid
-                ? FluidState.AMOUNT_MAX - targetState.getAmount()
+        int capacity = fluid.isSame(targetState.getType())
+                ? FluidState.AMOUNT_FULL - targetState.getAmount()
                 : amount;
         int transferred = Math.min(amount, Math.max(0, capacity));
 
@@ -205,7 +205,7 @@ public abstract class ConservativeFlowingFluid extends BaseFlowingFluid {
             return 0;
         }
 
-        int targetAmount = targetState.getType() == fluid
+        int targetAmount = fluid.isSame(targetState.getType())
                 ? targetState.getAmount() + transferred
                 : transferred;
         FluidState placed = fluid.getFlowing(
@@ -213,7 +213,7 @@ public abstract class ConservativeFlowingFluid extends BaseFlowingFluid {
                 direction == Direction.DOWN
         );
 
-        if (targetState.getType() == fluid) {
+        if (fluid.isSame(targetState.getType())) {
             level.setBlock(target, placed.createLegacyBlock(), 3);
             level.scheduleTick(
                     target,
