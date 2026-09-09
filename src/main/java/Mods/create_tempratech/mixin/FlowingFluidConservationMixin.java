@@ -193,7 +193,52 @@ public abstract class FlowingFluidConservationMixin extends Fluid {
                         .createLegacyBlock(),
                 3
         );
-        level.scheduleTick(pos, (Fluid) (Object) this, getTickDelay(level));
+        createTempratech$scheduleIfCanSpread(level, pos);
+    }
+
+    private void createTempratech$scheduleIfCanSpread(
+            Level level,
+            BlockPos pos
+    ) {
+        FluidState state = level.getFluidState(pos);
+        if (state.isEmpty() || !isSame(state.getType())) {
+            return;
+        }
+
+        BlockState currentBlock = level.getBlockState(pos);
+        BlockPos below = pos.below();
+        BlockState belowBlock = level.getBlockState(below);
+        if (createTempratech$canAccept(
+                level,
+                pos,
+                currentBlock,
+                Direction.DOWN,
+                below,
+                belowBlock,
+                level.getFluidState(below)
+        )) {
+            level.scheduleTick(pos, state.getType(), getTickDelay(level));
+            return;
+        }
+
+        for (Map.Entry<Direction, FluidState> entry :
+                getSpread(level, pos, currentBlock).entrySet()) {
+            Direction direction = entry.getKey();
+            BlockPos target = pos.relative(direction);
+            BlockState targetBlock = level.getBlockState(target);
+            if (createTempratech$canAccept(
+                    level,
+                    pos,
+                    currentBlock,
+                    direction,
+                    target,
+                    targetBlock,
+                    level.getFluidState(target)
+            )) {
+                level.scheduleTick(pos, state.getType(), getTickDelay(level));
+                return;
+            }
+        }
     }
 
     private boolean createTempratech$canAccept(
@@ -254,7 +299,7 @@ public abstract class FlowingFluidConservationMixin extends Fluid {
             spreadTo(level, target, targetBlock, direction, placed);
         }
 
-        level.scheduleTick(target, placed.getType(), getTickDelay(level));
+        createTempratech$scheduleIfCanSpread(level, target);
         return transferred;
     }
 
