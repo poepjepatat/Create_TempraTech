@@ -1,0 +1,159 @@
+{
+  "priority": 100,
+  "rules": [
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_iron"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1811,
+        "specific_heat": 820,
+        "density": 7000,
+        "conductivity": 30,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_gold"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1337,
+        "specific_heat": 160,
+        "density": 17300,
+        "conductivity": 35,
+        "glow_temperature_c": 450
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_copper"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1358,
+        "specific_heat": 600,
+        "density": 8000,
+        "conductivity": 45,
+        "glow_temperature_c": 450
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_zinc"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 693,
+        "specific_heat": 388,
+        "density": 6500,
+        "conductivity": 116,
+        "glow_temperature_c": 400
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_coal"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1273,
+        "specific_heat": 1100,
+        "density": 1200,
+        "conductivity": 4,
+        "glow_temperature_c": 400
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_diamond"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 3823,
+        "specific_heat": 2000,
+        "density": 3000,
+        "conductivity": 10,
+        "glow_temperature_c": 1000
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_emerald"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1573,
+        "specific_heat": 1000,
+        "density": 2500,
+        "conductivity": 8,
+        "glow_temperature_c": 600
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_lapis"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1273,
+        "specific_heat": 900,
+        "density": 2500,
+        "conductivity": 7,
+        "glow_temperature_c": 500
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_redstone"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 973,
+        "specific_heat": 900,
+        "density": 3000,
+        "conductivity": 12,
+        "glow_temperature_c": 400
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_quartz"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 1986,
+        "specific_heat": 740,
+        "density": 2200,
+        "conductivity": 6,
+        "glow_temperature_c": 700
+      }
+    },
+    {
+      "match": {
+        "blocks": [
+          "create_tempratech:molten_netherite"
+        ]
+      },
+      "material": {
+        "default_temperature_k": 2773,
+        "specific_heat": 500,
+        "density": 10000,
+        "conductivity": 20,
+        "glow_temperature_c": 500
+      }
+    }
+  ]
+}
