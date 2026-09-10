@@ -120,6 +120,7 @@ public abstract class FlowingFluidConservationMixin extends Fluid {
                     below,
                     belowBlock,
                     Direction.DOWN,
+                    remaining,
                     remaining
             );
             remaining -= moved;
@@ -172,7 +173,8 @@ public abstract class FlowingFluidConservationMixin extends Fluid {
                     target,
                     level.getBlockState(target),
                     direction,
-                    branchAmount
+                    branchAmount,
+                    remaining
             );
             remaining -= transferred;
         }
@@ -250,8 +252,24 @@ public abstract class FlowingFluidConservationMixin extends Fluid {
             BlockState targetBlock,
             FluidState targetState
     ) {
+        FluidState sourceState = level.getFluidState(source);
+        int sourceAmount = sourceState.getAmount();
+
         if (createTempratech$isSameFluid(targetState)) {
-            return targetState.getAmount() < FluidState.AMOUNT_FULL;
+            if (direction == Direction.DOWN) {
+                return targetState.getAmount() < FluidState.AMOUNT_FULL;
+            }
+
+            // Only equalize a meaningful horizontal height difference. A
+            // one-unit difference is considered settled, which prevents two
+            // low cells from sending the same volume back and forth forever.
+            return sourceAmount > targetState.getAmount() + 1;
+        }
+
+        // One remaining level is a settled puddle. It may still fall down,
+        // but it should not crawl sideways into an empty neighbor forever.
+        if (direction != Direction.DOWN && sourceAmount <= 1) {
+            return false;
         }
 
         return canSpreadTo(
@@ -271,9 +289,10 @@ public abstract class FlowingFluidConservationMixin extends Fluid {
             BlockPos target,
             BlockState targetBlock,
             Direction direction,
-            int requestedAmount
+            int requestedAmount,
+            int sourceAmount
     ) {
-        if (requestedAmount <= 0) {
+        if (requestedAmount <= 0 || sourceAmount <= 0) {
             return 0;
         }
 
@@ -281,8 +300,16 @@ public abstract class FlowingFluidConservationMixin extends Fluid {
         boolean sameFluid = createTempratech$isSameFluid(targetState);
         int targetAmount = sameFluid ? targetState.getAmount() : 0;
         int capacity = FluidState.AMOUNT_FULL - targetAmount;
-        int transferred = Math.min(requestedAmount, Math.max(0, capacity));
+        int transferable = Math.min(requestedAmount, Math.max(0, capacity));
 
+        if (direction != Direction.DOWN) {
+            // Move only enough to approach equilibrium. Integer division
+            // deliberately leaves a one-unit height difference at rest.
+            int equalizingAmount = Math.max(0, (sourceAmount - targetAmount) / 2);
+            transferable = Math.min(transferable, equalizingAmount);
+        }
+
+        int transferred = Math.min(transferable, sourceAmount);
         if (transferred <= 0) {
             return 0;
         }
