@@ -134,10 +134,6 @@ public class HeatPipe extends BaseEntityBlock {
             return true;
         }
 
-        if (state.is(modBlocks.HEAT_HARVESTER)) {
-            return direction != net.minecraft.core.Direction.UP;
-        }
-
         if(state.is(modBlocks.THERMOMETER)){
             return direction == Direction.UP;
         }

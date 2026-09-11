@@ -2,11 +2,7 @@ package Mods.create_tempratech;
 
 import Mods.create_tempratech.Client.ClientRegister;
 import Mods.create_tempratech.Network.ModPayloads;
-import Mods.create_tempratech.Regs.ModAttachments;
-import Mods.create_tempratech.Regs.modBlockEntities;
-import Mods.create_tempratech.Regs.modBlocks;
-import Mods.create_tempratech.Regs.modFluids;
-import Mods.create_tempratech.Regs.modItems;
+import Mods.create_tempratech.Regs.*;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalHazardHandler;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalServerTickHandler;
 import Mods.create_tempratech.ThermalSystem.ThermalPropertiesReloadListener;
@@ -17,6 +13,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.IEventBus;
@@ -45,15 +42,21 @@ public class Create_tempratech {
             CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.create_tempratech"))
                     .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(() -> modItems.HEAT_HARVESTER.get().getDefaultInstance())
+                    .icon(() -> new ItemStack(modItems.HEAT_PIPE.get()))
                     .displayItems((parameters, output) -> {
-                        output.accept(modItems.HEAT_HARVESTER);
                         output.accept(modItems.TITANIUM_INGOT);
                         output.accept(modItems.HEAT_PIPE);
                         output.accept(modItems.THERMOMETER);
                         output.accept(modItems.THERMAL_GOGGLES);
                         output.accept(modItems.VISUAL_THERMAL_GOGGLES);
-                        modFluids.all().forEach(fluid -> output.accept(fluid.bucket()));
+                        output.accept(modItems.MOLTEN_COAL_BUCKET);
+                        output.accept(modItems.MOLTEN_COPPER_BUCKET);
+                        output.accept(modItems.MOLTEN_IRON_BUCKET);
+                        output.accept(modItems.MOLTEN_GOLD_BUCKET);
+                        output.accept(modItems.MOLTEN_DIAMOND_BUCKET);
+                        output.accept(modItems.MOLTEN_NETHERITE_BUCKET);
+                        output.accept(modItems.MOLTEN_ZINC_BUCKET);
+
                     })
                     .build());
 
@@ -61,12 +64,13 @@ public class Create_tempratech {
         modEventBus.addListener(this::commonSetup);
         modEventBus.addListener(ModPayloads::register);
 
-        modFluids.register(modEventBus);
+        modFluids.FLUIDS.register(modEventBus);
         modBlocks.BLOCKS.register(modEventBus);
         modItems.ITEMS.register(modEventBus);
         CREATIVE_MODE_TABS.register(modEventBus);
         modBlockEntities.BLOCK_ENTITIES.register(modEventBus);
         ModAttachments.register(modEventBus);
+        modFluidTypes.FLUID_TYPES.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
         NeoForge.EVENT_BUS.register(ThermalServerTickHandler.class);

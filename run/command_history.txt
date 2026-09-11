@@ -31,3 +31,13 @@
 /temperature add -100000000000
 /temperature add 10000000000
 /temperature add 1000000000000
+/temperature add -200000
+/temperature add -20000000000
+/temperature add -20000000000000
+/setblock -2 -64 38 create_tempratech:active_vent
+/setblock -4 -63 37 create_tempratech:active_vent
+/temperature add 2000000
+/temperature add 200000000
+/temperature add 200000000000000
+/setblock -8 -63 37 create_tempratech:active_vent
+/setblock -8 -63 39 create_tempratech:active_vent

@@ -11,6 +11,7 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.FluidState;
 import net.neoforged.neoforge.common.Tags;
 
@@ -29,80 +30,47 @@ public final class ThermalTransformations {
             rule(
                     Tags.Blocks.ORES_IRON,
                     "minecraft:iron_block",
-                    modFluids.IRON,
+                    modFluids.MOLTEN_IRON.get(),
                     1538.0,
                     1500.0
             ),
             rule(
                     Tags.Blocks.ORES_GOLD,
                     "minecraft:gold_block",
-                    modFluids.GOLD,
+                    modFluids.MOLTEN_GOLD.get(),
                     1064.0,
                     1020.0
             ),
             rule(
-                    Tags.Blocks.ORES_COPPER,
-                    "minecraft:copper_block",
-                    modFluids.COPPER,
-                    1085.0,
-                    1040.0
-            ),
-            rule(
-                    ZINC_ORES,
-                    "create:zinc_block",
-                    modFluids.ZINC,
-                    420.0,
-                    390.0
-            ),
-            rule(
                     Tags.Blocks.ORES_COAL,
                     "minecraft:coal_block",
-                    modFluids.COAL,
-                    1000.0,
-                    900.0
+                    modFluids.MOLTEN_COAL.get(),
+                    1127.0 ,
+                    1100.0
+            ),
+            rule(
+                    Tags.Blocks.ORES_COPPER,
+                    "minecraft:copper_block",
+                    modFluids.MOLTEN_COPPER.get(),
+                    1084.62 ,
+                    1064.62
             ),
             rule(
                     Tags.Blocks.ORES_DIAMOND,
                     "minecraft:diamond_block",
-                    modFluids.DIAMOND,
-                    3550.0,
-                    3450.0
-            ),
-            rule(
-                    Tags.Blocks.ORES_EMERALD,
-                    "minecraft:emerald_block",
-                    modFluids.EMERALD,
-                    1300.0,
-                    1230.0
-            ),
-            rule(
-                    Tags.Blocks.ORES_LAPIS,
-                    "minecraft:lapis_block",
-                    modFluids.LAPIS,
-                    1000.0,
-                    900.0
-            ),
-            rule(
-                    Tags.Blocks.ORES_REDSTONE,
-                    "minecraft:redstone_block",
-                    modFluids.REDSTONE,
-                    700.0,
-                    650.0
-            ),
-            rule(
-                    Tags.Blocks.ORES_QUARTZ,
-                    "minecraft:quartz_block",
-                    modFluids.QUARTZ,
-                    1713.0,
-                    1650.0
+                    modFluids.MOLTEN_DIAMOND.get(),
+                    4027.0 ,
+                    4000.0
             ),
             rule(
                     Tags.Blocks.ORES_NETHERITE_SCRAP,
                     "minecraft:netherite_block",
-                    modFluids.NETHERITE,
-                    2500.0,
-                    2400.0
+                    modFluids.MOLTEN_NETHERITE.get(),
+                    3215.0 ,
+                    3190.0
             )
+
+
     );
 
     private ThermalTransformations() {
@@ -127,7 +95,7 @@ public final class ThermalTransformations {
                 return replacePreservingTemperature(
                         level,
                         pos,
-                        rule.molten().block().get().defaultBlockState(),
+                        rule.molten.defaultFluidState().createLegacyBlock(),
                         temperatureC
                 );
             }
@@ -158,10 +126,10 @@ public final class ThermalTransformations {
 
     private static boolean isMolten(
             FluidState fluidState,
-            modFluids.MoltenFluidDefinition molten
+            FlowingFluid molten
     ) {
-        return fluidState.is(molten.source().get())
-                || fluidState.is(molten.flowing().get());
+        return fluidState.is(molten.getSource())
+                || fluidState.is(molten.getFlowing());
     }
 
     private static boolean replacePreservingTemperature(
@@ -182,7 +150,7 @@ public final class ThermalTransformations {
     private static MeltRule rule(
             TagKey<Block> oreTag,
             String solidBlockId,
-            modFluids.MoltenFluidDefinition molten,
+            FlowingFluid molten,
             double meltingPointC,
             double solidifyPointC
     ) {
@@ -198,7 +166,7 @@ public final class ThermalTransformations {
     private record MeltRule(
             TagKey<Block> oreTag,
             ResourceLocation solidBlockId,
-            modFluids.MoltenFluidDefinition molten,
+            FlowingFluid molten,
             double meltingPointC,
             double solidifyPointC
     ) {

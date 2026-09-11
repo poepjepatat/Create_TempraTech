@@ -1,9 +1,10 @@
 package Mods.create_tempratech.Regs;
 
 import Mods.create_tempratech.Create_tempratech;
-import Mods.create_tempratech.Regs.BlockEntities.HeatHarvesterEntity;
+import Mods.create_tempratech.Regs.BlockEntities.ActiveVentEntity;
 import Mods.create_tempratech.Regs.BlockEntities.HeatPipeEntity;
 import Mods.create_tempratech.Regs.BlockEntities.ThermometerEntity;
+import Mods.create_tempratech.Regs.Blocks.ActiveVent;
 import Mods.create_tempratech.Regs.Blocks.HeatPipe;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -39,12 +40,12 @@ public class modBlockEntities {
             ).build(null)
     );
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HeatHarvesterEntity>>
-            HEAT_HARVESTER_ENTITY
-            = BLOCK_ENTITIES.register("heat_harvester",
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ActiveVentEntity>>
+            ACTIVE_VENT_ENTITY
+            = BLOCK_ENTITIES.register("active_vent",
             () -> BlockEntityType.Builder.of(
-                    HeatHarvesterEntity::new,
-                    modBlocks.HEAT_HARVESTER.get()
+                    ActiveVentEntity::new,
+                    modBlocks.ACTIVE_VENT.get()
             ).build(null)
     );
 }

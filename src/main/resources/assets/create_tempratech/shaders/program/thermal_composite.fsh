@@ -39,8 +39,10 @@ void main() {
     scene.g = texture(DiffuseSampler, uv).g;
     scene.b = texture(DiffuseSampler, clamp(uv - vec2(chroma, 0.0), vec2(0.0), vec2(1.0))).b;
 
+    // Keep a strong, crisp contribution from the block mask so the glow
+    // follows the voxel shape instead of becoming a softened cube.
     vec3 bloom = blurredHeat.rgb * (0.8 + 2.4 * heat);
-    vec3 whiteHot = mix(rawHeat.rgb, vec3(1.0, 0.94, 0.78), core * 0.7) * core * 0.65;
+    vec3 whiteHot = mix(rawHeat.rgb, vec3(1.0, 0.94, 0.78), core * 0.7) * core * 1.15;
 
     fragColor = vec4(scene + bloom + whiteHot, texture(DiffuseSampler, uv).a);
 }

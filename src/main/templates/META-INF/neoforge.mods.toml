@@ -27,6 +27,13 @@ ordering = "NONE"
 side = "BOTH"
 
 [[dependencies."${mod_id}"]]
+modId="flowing_fluids"
+type="required"
+versionRange="[0.6.1,)"
+ordering="NONE"
+side="BOTH"
+
+[[dependencies."${mod_id}"]]
 modId = "create"
 type = "required"
 versionRange = "[6.0.10,6.1.0)"

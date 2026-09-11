@@ -15,10 +15,6 @@
   "fluid.create_tempratech.molten_zinc": "Molten Zinc",
   "fluid.create_tempratech.molten_coal": "Molten Coal",
   "fluid.create_tempratech.molten_diamond": "Molten Diamond",
-  "fluid.create_tempratech.molten_emerald": "Molten Emerald",
-  "fluid.create_tempratech.molten_lapis": "Molten Lapis",
-  "fluid.create_tempratech.molten_redstone": "Molten Redstone",
-  "fluid.create_tempratech.molten_quartz": "Molten Quartz",
   "fluid.create_tempratech.molten_netherite": "Molten Netherite",
   "item.create_tempratech.molten_iron_bucket": "Molten Iron Bucket",
   "item.create_tempratech.molten_gold_bucket": "Molten Gold Bucket",
@@ -26,9 +22,5 @@
   "item.create_tempratech.molten_zinc_bucket": "Molten Zinc Bucket",
   "item.create_tempratech.molten_coal_bucket": "Molten Coal Bucket",
   "item.create_tempratech.molten_diamond_bucket": "Molten Diamond Bucket",
-  "item.create_tempratech.molten_emerald_bucket": "Molten Emerald Bucket",
-  "item.create_tempratech.molten_lapis_bucket": "Molten Lapis Bucket",
-  "item.create_tempratech.molten_redstone_bucket": "Molten Redstone Bucket",
-  "item.create_tempratech.molten_quartz_bucket": "Molten Quartz Bucket",
   "item.create_tempratech.molten_netherite_bucket": "Molten Netherite Bucket"
 }

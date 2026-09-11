@@ -1,13 +1,14 @@
 package Mods.create_tempratech.Regs;
 
 import Mods.create_tempratech.Create_tempratech;
-import Mods.create_tempratech.Regs.Blocks.MoltenLiquidBlock;
+import Mods.create_tempratech.Regs.Liquids.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.BucketItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.FlowingFluid;
 import net.minecraft.world.level.material.Fluid;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.fluids.BaseFlowingFluid;
@@ -22,216 +23,48 @@ import java.util.List;
 
 public final class modFluids {
 
-    public static final DeferredRegister<FluidType> FLUID_TYPES =
-            DeferredRegister.create(
-                    NeoForgeRegistries.Keys.FLUID_TYPES,
-                    Create_tempratech.MODID
-            );
-
     public static final DeferredRegister<Fluid> FLUIDS =
-            DeferredRegister.create(
-                    Registries.FLUID,
-                    Create_tempratech.MODID
-            );
+            DeferredRegister.create(Registries.FLUID, Create_tempratech.MODID);
 
-    public static final MoltenFluidDefinition IRON = register(
-            "iron", 1811, 7000, 7000, 0xFFFF6A00
-    );
-    public static final MoltenFluidDefinition GOLD = register(
-            "gold", 1337, 17300, 6500, 0xFFFFC400
-    );
-    public static final MoltenFluidDefinition COPPER = register(
-            "copper", 1358, 8000, 6500, 0xFFFF7A3D
-    );
-    public static final MoltenFluidDefinition ZINC = register(
-            "zinc", 693, 6500, 6000, 0xFF9FD8D8
-    );
-    public static final MoltenFluidDefinition COAL = register(
-            "coal", 1273, 1200, 8000, 0xFF5A1E0B
-    );
-    public static final MoltenFluidDefinition DIAMOND = register(
-            "diamond", 3823, 3000, 9000, 0xFF62F5E8
-    );
-    public static final MoltenFluidDefinition EMERALD = register(
-            "emerald", 1573, 2500, 8000, 0xFF28D96B
-    );
-    public static final MoltenFluidDefinition LAPIS = register(
-            "lapis", 1273, 2500, 8000, 0xFF315BD6
-    );
-    public static final MoltenFluidDefinition REDSTONE = register(
-            "redstone", 973, 3000, 7000, 0xFFFF2418
-    );
-    public static final MoltenFluidDefinition QUARTZ = register(
-            "quartz", 1986, 2200, 8500, 0xFFF4E7D3
-    );
-    public static final MoltenFluidDefinition NETHERITE = register(
-            "netherite", 2773, 10000, 10000, 0xFF5A4248
-    );
+    public static final DeferredHolder<Fluid, FlowingFluid> MOLTEN_IRON =
+            FLUIDS.register("molten_iron", MoltenIron::new);
 
-    private static final List<MoltenFluidDefinition> ALL = List.of(
-            IRON,
-            GOLD,
-            COPPER,
-            ZINC,
-            COAL,
-            DIAMOND,
-            EMERALD,
-            LAPIS,
-            REDSTONE,
-            QUARTZ,
-            NETHERITE
-    );
+    public static final DeferredHolder<Fluid, FlowingFluid> FLOWING_MOLTEN_IRON =
+            FLUIDS.register("flowing_molten_iron", MoltenIron::new);
 
-    private modFluids() {
-    }
+    public static final DeferredHolder<Fluid, FlowingFluid> MOLTEN_GOLD =
+            FLUIDS.register("molten_gold", MoltenGold::new);
 
-    public static void register(IEventBus eventBus) {
-        FLUID_TYPES.register(eventBus);
-        FLUIDS.register(eventBus);
-    }
+    public static final DeferredHolder<Fluid, FlowingFluid> FLOWING_MOLTEN_GOLD =
+            FLUIDS.register("flowing_molten_gold", MoltenGold::new);
 
-    public static List<MoltenFluidDefinition> all() {
-        return ALL;
-    }
+    public static final DeferredHolder<Fluid, FlowingFluid> MOLTEN_COPPER =
+            FLUIDS.register("molten_copper", MoltenCopper::new);
 
-    private static MoltenFluidDefinition register(
-            String materialName,
-            int temperatureK,
-            int density,
-            int viscosity,
-            int tintColor
-    ) {
-        return new MoltenFluidDefinition(
-                materialName,
-                temperatureK,
-                density,
-                viscosity,
-                tintColor
-        );
-    }
+    public static final DeferredHolder<Fluid, FlowingFluid> FLOWING_MOLTEN_COPPER =
+            FLUIDS.register("flowing_molten_copper", MoltenCopper::new);
 
-    public static final class MoltenFluidDefinition {
-        private final String materialName;
-        private final int viscosity;
-        private final int tintColor;
-        private final DeferredHolder<FluidType, FluidType> type;
-        private final DeferredHolder<Fluid, ConservativeFlowingFluid.Source> source;
-        private final DeferredHolder<Fluid, ConservativeFlowingFluid.Flowing> flowing;
-        private final DeferredBlock<MoltenLiquidBlock> block;
-        private final DeferredItem<BucketItem> bucket;
+    public static final DeferredHolder<Fluid, FlowingFluid> MOLTEN_COAL =
+            FLUIDS.register("molten_coal", MoltenCoal::new);
 
-        private MoltenFluidDefinition(
-                String materialName,
-                int temperatureK,
-                int density,
-                int viscosity,
-                int tintColor
-        ) {
-            this.materialName = materialName;
-            this.viscosity = viscosity;
-            this.tintColor = tintColor;
+    public static final DeferredHolder<Fluid, FlowingFluid> FLOWING_MOLTEN_COAL =
+            FLUIDS.register("flowing_molten_coal", MoltenCoal::new);
 
-            String fluidName = "molten_" + materialName;
+    public static final DeferredHolder<Fluid, FlowingFluid> MOLTEN_DIAMOND =
+            FLUIDS.register("molten_diamond", MoltenDiamond::new);
 
-            this.type = FLUID_TYPES.register(
-                    fluidName,
-                    () -> new FluidType(
-                            FluidType.Properties.create()
-                                    .descriptionId(
-                                            "fluid."
-                                                    + Create_tempratech.MODID
-                                                    + "."
-                                                    + fluidName
-                                    )
-                                    .lightLevel(15)
-                                    .temperature(temperatureK)
-                                    .density(density)
-                                    .viscosity(viscosity)
-                                    .canPushEntity(true)
-                                    .canSwim(false)
-                                    .canDrown(true)
-                                    .canExtinguish(false)
-                                    .canConvertToSource(false)
-                    )
-            );
+    public static final DeferredHolder<Fluid, FlowingFluid> FLOWING_MOLTEN_DIAMOND =
+            FLUIDS.register("flowing_molten_diamond", MoltenDiamond::new);
 
-            this.source = FLUIDS.register(
-                    fluidName,
-                    () -> new ConservativeFlowingFluid.Source(createProperties())
-            );
+    public static final DeferredHolder<Fluid, FlowingFluid> MOLTEN_NETHERITE =
+            FLUIDS.register("molten_netherite", MoltenNetherite::new);
 
-            this.flowing = FLUIDS.register(
-                    "flowing_" + fluidName,
-                    () -> new ConservativeFlowingFluid.Flowing(createProperties())
-            );
+    public static final DeferredHolder<Fluid, FlowingFluid> FLOWING_MOLTEN_NETHERRITE =
+            FLUIDS.register("flowing_molten_netherite", MoltenNetherite::new);
 
-            this.block = modBlocks.BLOCKS.register(
-                    fluidName,
-                    () -> new MoltenLiquidBlock(
-                            source.get(),
-                            BlockBehaviour.Properties.ofFullCopy(Blocks.LAVA)
-                                    .lightLevel(state -> 15)
-                    )
-            );
+    public static final DeferredHolder<Fluid, FlowingFluid> MOLTEN_ZINC =
+            FLUIDS.register("molten_zinc", MoltenZinc::new);
 
-            this.bucket = modItems.ITEMS.register(
-                    fluidName + "_bucket",
-                    () -> new BucketItem(
-                            source.get(),
-                            new Item.Properties()
-                                    .craftRemainder(Items.BUCKET)
-                                    .stacksTo(1)
-                    )
-            );
-        }
-
-        private BaseFlowingFluid.Properties createProperties() {
-            return new BaseFlowingFluid.Properties(type, source, flowing)
-                    .block(block)
-                    .bucket(bucket)
-                    .slopeFindDistance(2)
-                    .levelDecreasePerBlock(levelDecreasePerBlock())
-                    .tickRate(flowTickRate())
-                    .explosionResistance(100.0F);
-        }
-
-        private int flowTickRate() {
-            // Viscosity is in mPa*s. More viscous fluids update less often.
-            return Math.max(10, Math.min(40, 8 + viscosity / 500));
-        }
-
-        private int levelDecreasePerBlock() {
-            // Preserve long lava-like flows while making thick fluids lose
-            // more height per horizontal block.
-            return Math.max(1, Math.min(4, 1 + viscosity / 5000));
-        }
-
-        public String materialName() {
-            return materialName;
-        }
-
-        public int tintColor() {
-            return tintColor;
-        }
-
-        public DeferredHolder<FluidType, FluidType> type() {
-            return type;
-        }
-
-        public DeferredHolder<Fluid, ConservativeFlowingFluid.Source> source() {
-            return source;
-        }
-
-        public DeferredHolder<Fluid, ConservativeFlowingFluid.Flowing> flowing() {
-            return flowing;
-        }
-
-        public DeferredBlock<MoltenLiquidBlock> block() {
-            return block;
-        }
-
-        public DeferredItem<BucketItem> bucket() {
-            return bucket;
-        }
-    }
+    public static final DeferredHolder<Fluid, FlowingFluid> FLOWING_MOLTEN_ZINC =
+            FLUIDS.register("flowing_molten_zinc", MoltenZinc::new);
 }

@@ -16,6 +16,11 @@ repositories {
         url = "https://maven.createmod.net"
     }
 
+    maven {
+        name = "CurseForge"
+        url = "https://www.cursemaven.com"
+    }
+
     // Registrate
     maven {
         url = "https://maven.ithundxr.dev/snapshots"
@@ -84,6 +89,7 @@ dependencies {
     // Ponder
     implementation("net.createmod.ponder:ponder-neoforge:${ponder_version}+mc${minecraft_version}")
 
+    implementation "curse.maven:flowing-fluids-1108809:6587881"
     // Flywheel
     compileOnly("dev.engine-room.flywheel:flywheel-neoforge-api-${minecraft_version}:${flywheel_version}")
     runtimeOnly("dev.engine-room.flywheel:flywheel-neoforge-${minecraft_version}:${flywheel_version}")

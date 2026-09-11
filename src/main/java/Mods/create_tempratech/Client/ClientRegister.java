@@ -1,7 +1,7 @@
 package Mods.create_tempratech.Client;
 
 import Mods.create_tempratech.Client.Glowing.GlowRenderer;
-import Mods.create_tempratech.Client.Renderers.HeatHarvesterRenderer;
+import Mods.create_tempratech.Client.Renderers.ActiveVentRenderer;
 import Mods.create_tempratech.Client.Renderers.HeatPipeRenderer;
 import Mods.create_tempratech.Client.Renderers.ThermometerRenderer;
 import Mods.create_tempratech.Create_tempratech;
@@ -24,6 +24,8 @@ import static Mods.create_tempratech.Create_tempratech.LOGGER;
         value = Dist.CLIENT
 ) public class ClientRegister {
 
+
+
     @SubscribeEvent
     public static void registerRenderers(
             EntityRenderersEvent.RegisterRenderers event
@@ -41,8 +43,8 @@ import static Mods.create_tempratech.Create_tempratech.LOGGER;
         );
 
         event.registerBlockEntityRenderer(
-                modBlockEntities.HEAT_HARVESTER_ENTITY.get(),
-                HeatHarvesterRenderer::new
+                modBlockEntities.ACTIVE_VENT_ENTITY.get(),
+                ActiveVentRenderer::new
         );
     }
 
@@ -53,26 +55,7 @@ import static Mods.create_tempratech.Create_tempratech.LOGGER;
                 ResourceLocation.withDefaultNamespace("block/lava_still");
         ResourceLocation flowingTexture =
                 ResourceLocation.withDefaultNamespace("block/lava_flow");
-
-        modFluids.all().forEach(fluid -> event.registerFluidType(
-                new IClientFluidTypeExtensions() {
-                    @Override
-                    public ResourceLocation getStillTexture() {
-                        return stillTexture;
-                    }
-
-                    @Override
-                    public ResourceLocation getFlowingTexture() {
-                        return flowingTexture;
-                    }
-
-                    @Override
-                    public int getTintColor() {
-                        return fluid.tintColor();
-                    }
-                },
-                fluid.type().get()
-        ));
+        ;
     }
 
     public static void registerReloadListeners(

@@ -194,11 +194,10 @@ public final class GlowRenderer {
     ) {
         VoxelShape shape = state.getShape(level, pos);
         List<AABB> boxes = shape.toAabbs().stream()
-                .map(box -> box.inflate(0.015))
                 .toList();
 
         return boxes.isEmpty()
-                ? List.of(new AABB(-0.015, -0.015, -0.015, 1.015, 1.015, 1.015))
+                ? List.of()
                 : boxes;
     }
 
