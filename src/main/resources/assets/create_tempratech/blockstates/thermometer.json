@@ -1,9 +1,0 @@
-{
-  "multipart": [
-    {
-      "apply": {
-        "model": "create_tempratech:block/thermometer"
-      }
-    }
-  ]
-}

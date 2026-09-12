@@ -1,22 +1,21 @@
 package Mods.create_tempratech.Client;
 
 import Mods.create_tempratech.Client.Glowing.GlowRenderer;
-import Mods.create_tempratech.Client.Renderers.ActiveVentRenderer;
-import Mods.create_tempratech.Client.Renderers.HeatPipeRenderer;
-import Mods.create_tempratech.Client.Renderers.ThermometerRenderer;
+import Mods.create_tempratech.Client.Renderers.ActiveLiquidVentRenderer;
+import Mods.create_tempratech.Client.Renderers.CustomPipeAttachmentModel;
+import Mods.create_tempratech.Client.Renderers.ElectroMagneticPipeRenderer;
+import Mods.create_tempratech.Client.Renderers.ReinforcedPipeRenderer;
 import Mods.create_tempratech.Create_tempratech;
 import Mods.create_tempratech.Regs.modBlockEntities;
-import Mods.create_tempratech.Regs.modFluids;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.packs.resources.ResourceManagerReloadListener;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.RegisterClientReloadListenersEvent;
-import net.neoforged.neoforge.client.extensions.common.IClientFluidTypeExtensions;
 import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
-
 import static Mods.create_tempratech.Create_tempratech.LOGGER;
 
 @EventBusSubscriber(
@@ -24,7 +23,8 @@ import static Mods.create_tempratech.Create_tempratech.LOGGER;
         value = Dist.CLIENT
 ) public class ClientRegister {
 
-
+    private static final boolean CUSTOM_PIPE_PARTIALS =
+            CustomPipeAttachmentModel.initialize();
 
     @SubscribeEvent
     public static void registerRenderers(
@@ -32,20 +32,40 @@ import static Mods.create_tempratech.Create_tempratech.LOGGER;
     ) {
         LOGGER.info("REGISTERING HEAT PIPE RENDERER");
 
-        event.registerBlockEntityRenderer(
-                modBlockEntities.HEAT_PIPE_ENTITY.get(),
-                HeatPipeRenderer::new
-        );
+
 
         event.registerBlockEntityRenderer(
-                modBlockEntities.THERMOMETER_ENTITY.get(),
-                ThermometerRenderer::new
+                modBlockEntities.ACTIVE_LIQUID_VENT_ENTITY.get(),
+                ActiveLiquidVentRenderer::new
         );
-
         event.registerBlockEntityRenderer(
-                modBlockEntities.ACTIVE_VENT_ENTITY.get(),
-                ActiveVentRenderer::new
+                modBlockEntities.REINFORCED_PIPE_ENTITY.get(),
+                ReinforcedPipeRenderer::new
         );
+        event.registerBlockEntityRenderer(
+                modBlockEntities.ELECTRO_MAGNETIC_PIPE.get(),
+                ElectroMagneticPipeRenderer::new
+        );
+    }
+
+    @SubscribeEvent
+    public static void wrapPipeModels(ModelEvent.ModifyBakingResult event) {
+        for (var entry : event.getModels().entrySet()) {
+            var location = entry.getKey();
+            String path = location.id().getPath();
+            if (!location.id().getNamespace().equals(
+                    Create_tempratech.MODID)
+                    || (!path.equals("reinforced_pipe")
+                    && !path.equals("electromagnetic_pipe"))) {
+                continue;
+            }
+
+            entry.setValue(CustomPipeAttachmentModel.withAO(
+                    entry.getValue(),
+                    path.equals("reinforced_pipe")
+                            ? "reinforced_pipe"
+                            : "electromagnetic_pipe"));
+        }
     }
 
     public static void registerFluidExtensions(

@@ -4,6 +4,7 @@ import Mods.create_tempratech.Client.ClientRegister;
 import Mods.create_tempratech.Network.ModPayloads;
 import Mods.create_tempratech.Regs.*;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalHazardHandler;
+import Mods.create_tempratech.ThermalSystem.Simulation.PipeHeatHandler;
 import Mods.create_tempratech.ThermalSystem.Simulation.ThermalServerTickHandler;
 import Mods.create_tempratech.ThermalSystem.ThermalPropertiesReloadListener;
 import com.mojang.logging.LogUtils;
@@ -42,11 +43,11 @@ public class Create_tempratech {
             CREATIVE_MODE_TABS.register("example_tab", () -> CreativeModeTab.builder()
                     .title(Component.translatable("itemGroup.create_tempratech"))
                     .withTabsBefore(CreativeModeTabs.COMBAT)
-                    .icon(() -> new ItemStack(modItems.HEAT_PIPE.get()))
+                    .icon(() -> new ItemStack(modItems.THERMAL_GOGGLES.get()))
                     .displayItems((parameters, output) -> {
-                        output.accept(modItems.TITANIUM_INGOT);
-                        output.accept(modItems.HEAT_PIPE);
-                        output.accept(modItems.THERMOMETER);
+                        output.accept(modItems.ACTIVE_LIQUID_VENT_ITEM);
+                        output.accept(modItems.REINFORCED_PIPE_ITEM);
+                        output.accept(modItems.ELECTROMAGNETIC_PIPE_ITEM);
                         output.accept(modItems.THERMAL_GOGGLES);
                         output.accept(modItems.VISUAL_THERMAL_GOGGLES);
                         output.accept(modItems.MOLTEN_COAL_BUCKET);
@@ -73,6 +74,7 @@ public class Create_tempratech {
         modFluidTypes.FLUID_TYPES.register(modEventBus);
 
         NeoForge.EVENT_BUS.register(this);
+        NeoForge.EVENT_BUS.register(PipeHeatHandler.class);
         NeoForge.EVENT_BUS.register(ThermalServerTickHandler.class);
         NeoForge.EVENT_BUS.register(ThermalHazardHandler.class);
         NeoForge.EVENT_BUS.register(ThermalPropertiesReloadListener.class);

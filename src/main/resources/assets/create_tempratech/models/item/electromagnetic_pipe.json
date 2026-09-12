@@ -1,0 +1,17 @@
+{
+  "parent": "create_tempratech:block/electromagnetic_pipe/full_000000",
+  "display": {
+    "fixed": {
+      "rotation": [
+        0,
+        90,
+        0
+      ],
+      "scale": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    }
+  }
+}

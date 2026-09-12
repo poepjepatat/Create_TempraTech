@@ -1,7 +1,5 @@
 {
   "itemGroup.create_tempratech": "TempraTech",
-  "block.create_tempratech.heat_harvester": "Heat Harvester",
-  "block.create_tempratech.heat_pipe": "Heat Pipe",
   "item.create_tempratech.thermal_goggles": "Thermal Goggles",
   "item.create_tempratech.visual_thermal_goggles": "Visual Thermal Goggles",
   "gui.create_tempratech.thermal_goggles": "Thermal Scan",
@@ -22,5 +20,11 @@
   "item.create_tempratech.molten_zinc_bucket": "Molten Zinc Bucket",
   "item.create_tempratech.molten_coal_bucket": "Molten Coal Bucket",
   "item.create_tempratech.molten_diamond_bucket": "Molten Diamond Bucket",
-  "item.create_tempratech.molten_netherite_bucket": "Molten Netherite Bucket"
+  "item.create_tempratech.molten_netherite_bucket": "Molten Netherite Bucket",
+  "block.create_tempratech.reinforced_pipe": "Reinforced Pipe",
+  "item.create_tempratech.reinforced_pipe": "Reinforced Pipe",
+  "block.create_tempratech.electromagnetic_pipe": "Electromagnetic Pipe",
+  "item.create_tempratech.electromagnetic_pipe": "Electromagnetic Pipe",
+  "block.create_tempratech.active_vent": "Active Liquid Vent",
+  "item.create_tempratech.active_vent": "Active Liquid Vent"
 }

@@ -1,0 +1,9 @@
+{
+  "parent": "create_tempratech:block/active_vent/outer",
+  "display": {
+    "fixed": {
+      "rotation": [0, 90, 0],
+      "scale": [0.5, 0.5, 0.5]
+    }
+  }
+}

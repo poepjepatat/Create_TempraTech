@@ -41,3 +41,10 @@
 /temperature add 200000000000000
 /setblock -8 -63 37 create_tempratech:active_vent
 /setblock -8 -63 39 create_tempratech:active_vent
+/setblock -9 -63 39 create_tempratech:reinforced_pipe
+/setblock 4 -63 8 create_tempratech:active_vent
+/setblock 4 -63 8 create_tempratech:reinforced_pipe
+/setblock -5 -61 -1 create_tempratech:reinforced_pipe
+/setblock 2 -63 12 create_tempratech:reinforced_pipe
+/setblock 2 -63 12 create_tempratech:electromagnetic_pipe
+/setblock 2 -63 12 create_tempratech:active_vent

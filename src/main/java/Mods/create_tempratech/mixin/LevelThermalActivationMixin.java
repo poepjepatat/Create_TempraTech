@@ -15,6 +15,23 @@ public abstract class LevelThermalActivationMixin {
 
     @Inject(
             method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z",
+            at = @At("HEAD"),
+            cancellable = true
+    )
+    private void createTempratech$rejectNullBlockState(
+            BlockPos pos,
+            BlockState state,
+            int flags,
+            int recursionLeft,
+            CallbackInfoReturnable<Boolean> callback
+    ) {
+        if (state == null) {
+            callback.setReturnValue(false);
+        }
+    }
+
+    @Inject(
+            method = "setBlock(Lnet/minecraft/core/BlockPos;Lnet/minecraft/world/level/block/state/BlockState;II)Z",
             at = @At("RETURN")
     )
     private void createTempratech$activateThermalSimulation(

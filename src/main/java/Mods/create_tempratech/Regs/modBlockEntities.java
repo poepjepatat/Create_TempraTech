@@ -1,18 +1,14 @@
 package Mods.create_tempratech.Regs;
 
 import Mods.create_tempratech.Create_tempratech;
-import Mods.create_tempratech.Regs.BlockEntities.ActiveVentEntity;
-import Mods.create_tempratech.Regs.BlockEntities.HeatPipeEntity;
-import Mods.create_tempratech.Regs.BlockEntities.ThermometerEntity;
-import Mods.create_tempratech.Regs.Blocks.ActiveVent;
-import Mods.create_tempratech.Regs.Blocks.HeatPipe;
+import Mods.create_tempratech.Regs.BlockEntities.ActiveLiquidVentEntity;
+import Mods.create_tempratech.Regs.BlockEntities.ElectroMagneticPipeEntity;
+import Mods.create_tempratech.Regs.BlockEntities.ReinforcedPipeEntity;
+import Mods.create_tempratech.Regs.Blocks.ElectroMagneticPipe;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class modBlockEntities {
 
@@ -22,30 +18,32 @@ public class modBlockEntities {
                     Create_tempratech.MODID
             );
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ThermometerEntity>>
-            THERMOMETER_ENTITY
-            = BLOCK_ENTITIES.register("thermometer",
-            () -> BlockEntityType.Builder.of(
-                    ThermometerEntity::new,
-                    modBlocks.THERMOMETER.get()
-            ).build(null)
-    );
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<HeatPipeEntity>>
-            HEAT_PIPE_ENTITY
-            = BLOCK_ENTITIES.register("heat_pipe",
-            () -> BlockEntityType.Builder.of(
-                    HeatPipeEntity::new,
-                    modBlocks.HEAT_PIPE.get()
-            ).build(null)
-    );
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ActiveVentEntity>>
-            ACTIVE_VENT_ENTITY
-            = BLOCK_ENTITIES.register("active_vent",
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ElectroMagneticPipeEntity>>
+            ELECTRO_MAGNETIC_PIPE
+            = BLOCK_ENTITIES.register("electromagnetic_pipe",
             () -> BlockEntityType.Builder.of(
-                    ActiveVentEntity::new,
+                    ElectroMagneticPipeEntity::new,
+                    modBlocks.ELECTRO_MAGNETIC_PIPE.get()
+            ).build(null));
+
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ActiveLiquidVentEntity>>
+            ACTIVE_LIQUID_VENT_ENTITY
+            = BLOCK_ENTITIES.register("active_liquid_vent",
+            () -> BlockEntityType.Builder.of(
+                    ActiveLiquidVentEntity::new,
                     modBlocks.ACTIVE_VENT.get()
+            ).build(null)
+    );
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ReinforcedPipeEntity>>
+            REINFORCED_PIPE_ENTITY
+            = BLOCK_ENTITIES.register("reinforced_pipe",
+            () -> BlockEntityType.Builder.of(
+                    ReinforcedPipeEntity::new,
+                    modBlocks.REINFORCED_PIPE.get()
             ).build(null)
     );
 }

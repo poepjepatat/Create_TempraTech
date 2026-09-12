@@ -69,17 +69,19 @@ public class MoltenCopper extends FlowingFluid{
 
     @Override
     protected BlockState createLegacyBlock(FluidState fluidState) {
-        return null;
+        return net.minecraft.world.level.block.Blocks.LAVA.defaultBlockState();
     }
 
     @Override
     public boolean isSource(FluidState fluidState) {
-        return false;
+        return fluidState.getType() == getSource();
     }
 
     @Override
     public int getAmount(FluidState fluidState) {
-        return 0;
+        return isSource(fluidState)
+                ? 8
+                : fluidState.getValue(FlowingFluid.LEVEL);
     }
 
     @Override

@@ -1,0 +1,198 @@
+---- Minecraft Crash Report ----
+// Ooh. Shiny.
+
+Time: 2026-09-12 09:06:57
+Description: Unexpected error
+
+java.lang.NullPointerException: Cannot invoke "net.minecraft.world.level.block.state.BlockState.getBlock()" because "p_46606_" is null
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.setBlock(Level.java:223) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids_neoforge.mixins.json:MixinLevel from mod flowing_fluids,pl:mixin:APP:create_tempratech.mixins.json:LevelThermalActivationMixin from mod create_tempratech,pl:mixin:APP:flywheel.impl.mixins.json:LevelMixin from mod flywheel,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.ClientLevel.setBlock(ClientLevel.java:168) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.setBlock(Level.java:212) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids_neoforge.mixins.json:MixinLevel from mod flowing_fluids,pl:mixin:APP:create_tempratech.mixins.json:LevelThermalActivationMixin from mod create_tempratech,pl:mixin:APP:flywheel.impl.mixins.json:LevelMixin from mod flywheel,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.BucketItem.ff$emptyContents_AndGetRemainder(BucketItem.java:709) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids.mixins.json:MixinBucketItem from mod flowing_fluids,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.BucketItem.handler$zze000$flowing_fluids$alterBehaviourIfPartial(BucketItem.java:615) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids.mixins.json:MixinBucketItem from mod flowing_fluids,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.BucketItem.use(BucketItem.java) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids.mixins.json:MixinBucketItem from mod flowing_fluids,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.ItemStack.use(ItemStack.java:391) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:ItemStackMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.MultiPlayerGameMode.lambda$useItem$5(MultiPlayerGameMode.java:387) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.MultiPlayerGameMode.startPrediction(MultiPlayerGameMode.java:264) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.MultiPlayerGameMode.useItem(MultiPlayerGameMode.java:371) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.startUseItem(Minecraft.java:1766) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.handleKeybinds(Minecraft.java:2023) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.tick(Minecraft.java:1837) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.runTick(Minecraft.java:1161) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:807) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
+
+
+A detailed walkthrough of the error, its code path and all known details is as follows:
+---------------------------------------------------------------------------------------
+
+-- Head --
+Thread: Render thread
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.setBlock(Level.java:223) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids_neoforge.mixins.json:MixinLevel from mod flowing_fluids,pl:mixin:APP:create_tempratech.mixins.json:LevelThermalActivationMixin from mod create_tempratech,pl:mixin:APP:flywheel.impl.mixins.json:LevelMixin from mod flywheel,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.ClientLevel.setBlock(ClientLevel.java:168) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A,re:mixin,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.level.Level.setBlock(Level.java:212) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:computing_frames,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids_neoforge.mixins.json:MixinLevel from mod flowing_fluids,pl:mixin:APP:create_tempratech.mixins.json:LevelThermalActivationMixin from mod create_tempratech,pl:mixin:APP:flywheel.impl.mixins.json:LevelMixin from mod flywheel,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.BucketItem.ff$emptyContents_AndGetRemainder(BucketItem.java:709) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids.mixins.json:MixinBucketItem from mod flowing_fluids,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.BucketItem.handler$zze000$flowing_fluids$alterBehaviourIfPartial(BucketItem.java:615) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids.mixins.json:MixinBucketItem from mod flowing_fluids,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.BucketItem.use(BucketItem.java) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:flowing_fluids.mixins.json:MixinBucketItem from mod flowing_fluids,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.world.item.ItemStack.use(ItemStack.java:391) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:accesstransformer:B,re:classloading,pl:accesstransformer:B,pl:mixin:APP:create.mixins.json:ItemStackMixin from mod create,pl:mixin:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.MultiPlayerGameMode.lambda$useItem$5(MultiPlayerGameMode.java:387) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.MultiPlayerGameMode.startPrediction(MultiPlayerGameMode.java:264) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.multiplayer.MultiPlayerGameMode.useItem(MultiPlayerGameMode.java:371) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.startUseItem(Minecraft.java:1766) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.handleKeybinds(Minecraft.java:2023) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+-- Uptime --
+Details:
+	JVM uptime: 30.154s
+	Wall uptime: 21.135s
+	High-res time: 28.984s
+	Client ticks: 307 ticks / 15.350s
+Stacktrace:
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.fillReport(Minecraft.java:2395) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.emergencySaveAndCrash(Minecraft.java:868) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.Minecraft.run(Minecraft.java:828) ~[neoforge-21.1.249.jar%23177!/:?] {re:mixin,pl:runtimedistcleaner:A,re:classloading,pl:mixin:A,pl:runtimedistcleaner:A}
+	at TRANSFORMER/minecraft@1.21.1/net.minecraft.client.main.Main.main(Main.java:230) ~[neoforge-21.1.249.jar%23177!/:?] {re:classloading,pl:runtimedistcleaner:A}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.runTarget(CommonLaunchHandler.java:136) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.clientService(CommonLaunchHandler.java:124) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.NeoForgeClientDevLaunchHandler.runService(NeoForgeClientDevLaunchHandler.java:23) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/fml_loader@4.0.44/net.neoforged.fml.loading.targets.CommonLaunchHandler.lambda$launchService$4(CommonLaunchHandler.java:118) ~[loader-4.0.44.jar%23134!/:4.0] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandlerDecorator.launch(LaunchServiceHandlerDecorator.java:30) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:53) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.LaunchServiceHandler.launch(LaunchServiceHandler.java:71) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.run(Launcher.java:103) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.Launcher.main(Launcher.java:74) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:26) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at MC-BOOTSTRAP/cpw.mods.modlauncher@11.0.5/cpw.mods.modlauncher.BootstrapLaunchConsumer.accept(BootstrapLaunchConsumer.java:23) [modlauncher-11.0.5.jar%23114!/:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.run(BootstrapLauncher.java:210) [bootstraplauncher-2.0.2.jar:?] {}
+	at cpw.mods.bootstraplauncher@2.0.2/cpw.mods.bootstraplauncher.BootstrapLauncher.main(BootstrapLauncher.java:69) [bootstraplauncher-2.0.2.jar:?] {}
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103) ~[?:?] {}
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580) ~[?:?] {}
+	at net.neoforged.devlaunch.Main.main(Main.java:57) [DevLaunch-1.0.2.jar:?] {}
+
+
+-- Affected level --
+Details:
+	All players: 1 total; [LocalPlayer['Dev'/1, l='ClientLevel', x=1.34, y=-63.00, z=14.64]]
+	Chunk stats: 361, 201
+	Level dimension: minecraft:overworld
+	Level spawn location: World: (0,-63,0), Section: (at 0,1,0 in 0,-4,0; chunk contains blocks 0,-64,0 to 15,319,15), Region: (0,0; contains chunks 0,0 to 31,31, blocks 0,-64,0 to 511,319,511)
+	Level time: 1286 game time, 1286 day time
+	Server brand: neoforge
+	Server type: Integrated singleplayer server
+	Tracked entity count: 1
+
+-- Last reload --
+Details:
+	Reload number: 1
+	Reload reason: initial
+	Finished: Yes
+	Packs: vanilla, mod_resources, mod/flowing_fluids, mod/create_tempratech, mod/flywheel, mod/ponder, mod/create, mod/neoforge
+
+-- System Details --
+Details:
+	Minecraft Version: 1.21.1
+	Minecraft Version ID: 1.21.1
+	Operating System: Linux (amd64) version 7.0.0-31-generic
+	Java Version: 21.0.12.1, Eclipse Adoptium
+	Java VM Version: OpenJDK 64-Bit Server VM (mixed mode, sharing), Eclipse Adoptium
+	Memory: 326536264 bytes (311 MiB) / 1040187392 bytes (992 MiB) up to 3984588800 bytes (3800 MiB)
+	CPUs: 16
+	Processor Vendor: GenuineIntel
+	Processor Name: 12th Gen Intel(R) Core(TM) i7-12650H
+	Identifier: Intel64 Family 6 Model 154 Stepping 3
+	Microarchitecture: Alder Lake
+	Frequency (GHz): 4.60
+	Number of physical packages: 1
+	Number of physical CPUs: 10
+	Number of logical CPUs: 16
+	Graphics card #0 name: Alder Lake-P GT1 [UHD Graphics]
+	Graphics card #0 vendor: Intel Corporation (0x8086)
+	Graphics card #0 VRAM (MiB): 256.00
+	Graphics card #0 deviceId: 0x46a3
+	Graphics card #0 versionInfo: unknown
+	Graphics card #1 name: GA106M [GeForce RTX 3060 Mobile / Max-Q]
+	Graphics card #1 vendor: NVIDIA Corporation (0x10de)
+	Graphics card #1 VRAM (MiB): 8224.00
+	Graphics card #1 deviceId: 0x2520
+	Graphics card #1 versionInfo: unknown
+	Virtual memory max (MiB): 11695.18
+	Virtual memory used (MiB): 14145.58
+	Swap memory total (MiB): 4096.00
+	Swap memory used (MiB): 3149.35
+	Space in storage for jna.tmpdir (MiB): <path not set>
+	Space in storage for org.lwjgl.system.SharedLibraryExtractPath (MiB): <path not set>
+	Space in storage for io.netty.native.workdir (MiB): <path not set>
+	Space in storage for java.io.tmpdir (MiB): available: 7568.26, total: 7599.18
+	Space in storage for workdir (MiB): available: 412653.97, total: 478562.97
+	JVM Flags: 0 total; 
+	Launched Version: 21.1.249
+	Backend library: LWJGL version 3.3.3+5
+	Backend API: Mesa Intel(R) Graphics (ADL GT2) GL version 4.6 (Core Profile) Mesa 26.0.8-1ubuntu0.3, Intel
+	Window size: 1920x1200
+	GFLW Platform: x11
+	GL Caps: Using framebuffer using OpenGL 3.2
+	GL debug messages: 
+	Is Modded: Definitely; Client brand changed to 'neoforge'; Server brand changed to 'neoforge'
+	Universe: 400921fb54442d18
+	Type: Integrated Server (map_client.txt)
+	Graphics mode: fancy
+	Render Distance: 6/6 chunks
+	Resource Packs: vanilla, mod_resources, mod/flowing_fluids, mod/create_tempratech, mod/flywheel, mod/ponder (incompatible), mod/create (incompatible), mod/neoforge
+	Current Language: en_us
+	Locale: en_US
+	System encoding: UTF-8
+	File encoding: UTF-8
+	CPU: 16x 12th Gen Intel(R) Core(TM) i7-12650H
+	Server Running: true
+	Player Count: 1 / 8; [ServerPlayer['Dev'/1, l='ServerLevel[New World]', x=1.34, y=-63.00, z=14.64]]
+	Active Data Packs: create:dynamic_data, vanilla, mod_data, mod/flowing_fluids, mod/create_tempratech, mod/flywheel (incompatible), mod/ponder (incompatible), mod/create (incompatible), mod/neoforge
+	Available Data Packs: bundle, trade_rebalance, vanilla, mod/create (incompatible), mod/create_tempratech, mod/flowing_fluids, mod/flywheel (incompatible), mod/neoforge, mod/ponder (incompatible), mod_data, create:dynamic_data
+	Enabled Feature Flags: minecraft:vanilla
+	World Generation: Stable
+	World Seed: 1742973616083192223
+	ModLauncher: 11.0.5+main.901c6ea8
+	ModLauncher launch target: forgeclientdev
+	ModLauncher services: 
+		sponge-mixin-0.15.2+mixin.0.8.7.jar mixin PLUGINSERVICE 
+		loader-4.0.44.jar slf4jfixer PLUGINSERVICE 
+		loader-4.0.44.jar runtime_enum_extender PLUGINSERVICE 
+		at-modlauncher-10.0.1.jar accesstransformer PLUGINSERVICE 
+		loader-4.0.44.jar runtimedistcleaner PLUGINSERVICE 
+		modlauncher-11.0.5.jar mixin TRANSFORMATIONSERVICE 
+		modlauncher-11.0.5.jar fml TRANSFORMATIONSERVICE 
+	FML Language Providers: 
+		javafml@4.0
+		lowcodefml@4.0
+		minecraft@4.0
+	Mod List: 
+		create-1.21.1-6.0.10-280-slim.jar                 |Create                        |create                        |6.0.10              |Manifest: NOSIGNATURE
+		main                                              |Create_TempraTech             |create_tempratech             |1.0-SNAPSHOT        |Manifest: NOSIGNATURE
+		flowing-fluids-1108809-6587881.jar                |FlowingFluids                 |flowing_fluids                |0.6.1               |Manifest: NOSIGNATURE
+		flywheel-neoforge-1.21.1-1.0.6.jar                |Flywheel                      |flywheel                      |1.0.6               |Manifest: NOSIGNATURE
+		neoforge-21.1.249.jar                             |Minecraft                     |minecraft                     |1.21.1              |Manifest: NOSIGNATURE
+		neoforge-21.1.249.jar                             |NeoForge                      |neoforge                      |21.1.249            |Manifest: NOSIGNATURE
+		ponder-neoforge-1.0.82+mc1.21.1.jar               |Ponder                        |ponder                        |1.0.82+mc1.21.1     |Manifest: NOSIGNATURE
+	Crash Report UUID: 3fce250c-93c0-4c24-af36-0c981de0df9d
+	FML: 4.0.44
+	NeoForge: 21.1.249
+	Flywheel Backend: flywheel:instancing

@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=north": {
-      "model": "create_tempratech:block/active_vent/active_vent"
+      "model": "create_tempratech:block/active_vent/outer"
     },
     "facing=south": {
-      "model": "create_tempratech:block/active_vent/active_vent",
+      "model": "create_tempratech:block/active_vent/outer",
       "y": 180
     },
     "facing=west": {
-      "model": "create_tempratech:block/active_vent/active_vent",
+      "model": "create_tempratech:block/active_vent/outer",
       "y": 270
     },
     "facing=east": {
-      "model": "create_tempratech:block/active_vent/active_vent",
+      "model": "create_tempratech:block/active_vent/outer",
       "y": 90
     }
   }
